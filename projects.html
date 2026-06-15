@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selected Projects · SAM·MALIK</title>
+  <meta name="description" content="Selected data engineering, database, and machine-learning projects by Sam Malik — built on Python and SQL." />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="sm-grain"></div>
+  <div class="sm-scan"></div>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a class="brand" href="index.html">SAM<span class="middot">·</span>MALIK</a>
+      <button class="nav__toggle">≡ MENU</button>
+      <div class="nav__links">
+        <a href="index.html">Home</a>
+        <a href="index.html#ethos">Ethos</a>
+        <a href="experience.html">Experience</a>
+        <a href="projects.html">Projects</a>
+        <a href="writing.html">Writing</a>
+        <a href="reading.html">Reading</a>
+        <a href="#connect">Connect</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <header class="page-head wrap">
+      <p class="eyebrow"><span class="idx">0.4</span> — PORTFOLIO</p>
+      <h1>Selected projects.</h1>
+      <p class="lead" style="margin-top:24px">
+        Each of these started as a real question. Pay equity, resale pricing, privacy risk, how a pandemic
+        moved across states. The work was building the data infrastructure and analysis to actually answer it,
+        end to end. Almost all of them run on <span style="color:var(--phosphor)">Python and SQL</span>, from
+        relational schema design and query optimization on one side to pandas and scikit-learn modeling on the other.
+      </p>
+      <div class="taglist" style="margin-top:28px">
+        <span class="tag tag--phosphor">Python</span>
+        <span class="tag tag--phosphor">SQL</span>
+        <span class="tag">scikit-learn</span>
+        <span class="tag">pandas</span>
+        <span class="tag">Tableau</span>
+        <span class="tag">Azure SQL</span>
+        <span class="tag">Database Design</span>
+        <span class="tag">NLP</span>
+      </div>
+    </header>
+
+    <section class="section wrap">
+
+      <!-- ============ 01 · HRIS ============ -->
+      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
+        <span class="card__index">01</span>
+        <div class="grid grid--2" style="align-items:start">
+          <div>
+            <span class="tag tag--phosphor"><span class="dot"></span>Systems Design · DB</span>
+            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Equality-Driven HRIS</h2>
+            <p class="sm-label" style="color:var(--phosphor)">PAY-EQUITY HRIS</p>
+            <p style="margin-top:16px">A redesign of a global retailer's Human Resources Information System (4,000+ stores) built around a single goal: detect and close gender- and race-based pay disparities. I designed the equitable-pay data model and the manager-facing performance and compensation dashboards, with role-based access control, audit logging, and compensation-review workflows baked in.</p>
+            <p>On top of the systems-design work I built the analytical layer: a <strong style="color:var(--bone)">SQL</strong> schema for employees, compensation history, and audit trails, and a <strong style="color:var(--bone)">Python</strong> pay-gap analysis (regression controlling for role, level, and tenure) that feeds the disparity flags surfaced on the dashboard.</p>
+
+            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
+            <div class="taglist" style="margin-top:10px">
+              <span class="tag tag--phosphor">Python</span><span class="tag tag--phosphor">SQL</span><span class="tag">pandas</span><span class="tag">statsmodels</span><span class="tag">RBAC</span><span class="tag">Audit Logging</span><span class="tag">Dashboard Design</span>
+            </div>
+
+            <p class="sm-label" style="margin-top:24px">What I learned</p>
+            <ul class="md" style="margin-top:10px">
+              <li>Fairness has to be something you can query. A pay-equity claim is only as good as the schema and the controls sitting behind the number.</li>
+              <li>Audit trails and role-based access aren't features you bolt on at the end. They shape the data model from the very first table.</li>
+              <li>A dashboard only changes behavior when the metric behind it can stand up to legal and HR at the same time.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="exhibit">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · COMPENSATION DASHBOARD WIREFRAME</span></div>
+              <div class="exhibit__plate"><img src="assets/img/hris-wireframe.png" alt="HRIS current-progress dashboard wireframe showing completed, on-going, and new goals" /></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ 02 · GRAILED ============ -->
+      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
+        <span class="card__index">02</span>
+        <div class="grid grid--2" style="align-items:start">
+          <div>
+            <div class="exhibit">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · AVG RESALE PRICE BY BRAND × CONDITION</span></div>
+              <div class="exhibit__plate"><img src="assets/img/grailed-dashboard.png" alt="Tableau bar chart of average Grailed resale price by brand and condition" /></div>
+            </div>
+            <a class="btn btn--primary" style="margin-top:16px" href="https://public.tableau.com/shared/F6N6XKSZT?:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener">Open live dashboard <span>→</span></a>
+          </div>
+          <div>
+            <span class="tag tag--phosphor"><span class="dot"></span>Analytics · Viz</span>
+            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Grailed Luxury Market Analysis</h2>
+            <p class="sm-label" style="color:var(--phosphor)">RESALE MARKET DASHBOARD</p>
+            <p style="margin-top:16px">A data story on the Grailed resale market, built from thousands of menswear listings (Rick Owens, Saint Laurent, Kapital, Levi's and others). I built multi-view and interactive Tableau dashboards to answer how resale value is driven by brand prestige, item condition, Japanese-made origin, and price-drop behavior, and found a heavily right-skewed market where prestige and newness dominate.</p>
+            <p>Before any chart, the raw scrape needed serious shaping. Alongside Tableau Prep I used <strong style="color:var(--bone)">Python (pandas)</strong> to normalize collaboration brand strings, extract numeric waist sizes from category text, and engineer the Japan/non-Japan, price-drop, and premium-price flags, then validated the cleaned extract with <strong style="color:var(--bone)">SQL</strong> aggregation queries (median price by brand × condition).</p>
+
+            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
+            <div class="taglist" style="margin-top:10px">
+              <span class="tag tag--phosphor">Python</span><span class="tag tag--phosphor">SQL</span><span class="tag">pandas</span><span class="tag">Tableau</span><span class="tag">Tableau Prep</span><span class="tag">Feature Engineering</span>
+            </div>
+
+            <p class="sm-label" style="margin-top:24px">What I learned</p>
+            <ul class="md" style="margin-top:10px">
+              <li>Most of the signal lived in the prep work. The derived fields (origin, premium, price-drop) carried the whole story.</li>
+              <li>Right-skewed markets punish the mean, so the brand × condition medians told a far truer story of resale value.</li>
+              <li>An interactive filter is only as honest as the aggregation under it, which is why I cross-checked Tableau against my own SQL.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ 03 · DIGITAL I-D ============ -->
+      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
+        <span class="card__index">03</span>
+        <div class="grid grid--2" style="align-items:start">
+          <div>
+            <span class="tag tag--phosphor"><span class="dot"></span>Data Science · Web</span>
+            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Digital i-D</h2>
+            <p class="sm-label" style="color:var(--phosphor)">INTERACTIVE PRIVACY STUDY</p>
+            <p style="margin-top:16px">A web app that makes invisible data collection and dark patterns visible, then teaches people concrete habits to protect their privacy. I owned the data-science end to end: designing the survey and poll instruments on student privacy awareness, then turning responses into the awareness metrics and segment findings that drove the app's content.</p>
+            <p>I analyzed responses in <strong style="color:var(--bone)">Python (pandas)</strong>, scoring awareness, segmenting by major and year, and testing which interventions correlated with safer behavior, then stored and queried the survey data in <strong style="color:var(--bone)">SQL</strong> so findings stayed reproducible as responses came in.</p>
+
+            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
+            <div class="taglist" style="margin-top:10px">
+              <span class="tag tag--phosphor">Python</span><span class="tag tag--phosphor">SQL</span><span class="tag">pandas</span><span class="tag">Survey Design</span><span class="tag">Data Viz</span><span class="tag tag--oxblood">Privacy</span>
+            </div>
+
+            <p class="sm-label" style="margin-top:24px">What I learned</p>
+            <ul class="md" style="margin-top:10px">
+              <li>Awareness is measurable, but only if you design the instrument and the schema before you collect a single response.</li>
+              <li>The gap between privacy concern and privacy action is the real opportunity here, and it's a data question first.</li>
+              <li>Shipping analysis into a live tool forces a discipline that a static report never does.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="exhibit">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">LIVE · DIGITAL-ID-F1AFF.WEB.APP</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:18px">
+                <div style="font-family:var(--font-mono)">
+                  <div style="display:flex; align-items:baseline; gap:8px">
+                    <span style="color:var(--bone); font-weight:600; letter-spacing:.04em">DI-<span style="color:var(--phosphor)">D</span></span>
+                    <span style="color:var(--ash-dim); font-size:10px; letter-spacing:.18em">· DIGITAL IDENTITY</span>
+                  </div>
+                  <div style="font-size:9.5px; letter-spacing:.14em; margin-top:6px"><span style="color:var(--oxblood-lift)">●</span> <span style="color:var(--ash)">SYSTEM INITIALISED · </span><span style="color:var(--phosphor)">TRACKING ACTIVE</span></div>
+                  <div class="display" style="font-family:var(--font-ui); font-weight:700; line-height:1.0; margin:14px 0 16px; font-size:1.6rem">
+                    <span style="color:var(--bone)">Trace Your</span><br><span style="color:var(--phosphor)">Digital Footprint</span>
+                  </div>
+                  <div style="border:1px solid var(--hairline); border-radius:4px; overflow:hidden">
+                    <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-bottom:1px solid var(--hairline)">
+                      <span><span style="color:var(--oxblood-lift)">●</span> <span style="color:var(--signal-warn)">●</span> <span style="color:var(--phosphor)">●</span> &nbsp;<span style="color:var(--ash); font-size:10px">SESSION_REPLAY.log</span></span>
+                      <span style="color:var(--ash-dim); font-size:9px">8 events</span>
+                    </div>
+                    <div style="padding:8px 10px; font-size:9.5px; line-height:1.85; color:var(--bone-dim)">
+                      <div><span style="color:var(--ash-dim)">00:00:25</span> <span style="color:var(--phosphor)">(INIT)</span> &nbsp;Session replay initialized…</div>
+                      <div><span style="color:var(--ash-dim)">00:00:28</span> <span style="color:var(--phosphor)">(MOUSE)</span> &nbsp;cursor at (1398, 103)</div>
+                      <div><span style="color:var(--ash-dim)">00:00:48</span> <span style="color:var(--phosphor)">(LOAD)</span> &nbsp;Page fully loaded</div>
+                      <div><span style="color:var(--ash-dim)">00:00:90</span> <span style="color:var(--phosphor)">(TRACK)</span> &nbsp;Mouse tracking enabled</div>
+                      <div><span style="color:var(--ash-dim)">00:02:80</span> <span style="color:var(--signal-warn)">(SCROLL)</span> &nbsp;scroll offset 4px</div>
+                      <div><span style="color:var(--ash-dim)">00:04:00</span> <span style="color:var(--signal-warn)">(SCROLL)</span> &nbsp;scroll offset 850px</div>
+                      <div><span style="color:var(--ash-dim)">00:05:23</span> <span style="color:var(--signal-warn)">(SCROLL)</span> &nbsp;scroll offset 1124px</div>
+                      <div><span style="color:var(--ash-dim)">00:06:39</span> <span style="color:var(--phosphor)">(MOUSE)</span> &nbsp;cursor at (689, 132)</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="btn btn--primary" style="margin-top:16px" href="https://digital-id-f1aff.web.app/" target="_blank" rel="noopener">Open live app <span>→</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ 04 · PRIVACY REVIEW DETECTOR (no visual) ============ -->
+      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
+        <span class="card__index">04</span>
+        <div style="max-width:78ch">
+          <span class="tag tag--oxblood"><span class="dot"></span>NLP · Machine Learning</span>
+          <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Privacy-Aware Fashion Review Risk Detector</h2>
+          <p class="sm-label" style="color:var(--phosphor)">NLP CLASSIFIER</p>
+          <p style="margin-top:16px">A system that flags fashion reviews likely to overshare sensitive personal information (body measurements, health, pregnancy) <em>before</em> they're posted publicly, prompting the writer to reconsider. Built on the Women's Clothing E-Commerce Reviews dataset (23,486 reviews), with a synthetic <code>privacy_risk</code> target engineered during preprocessing.</p>
+          <p>The core is a <strong style="color:var(--bone)">Python</strong> NLP pipeline: TF-IDF features over the review text plus light metadata, a logistic-regression classifier, and tuning aimed deliberately at recall on the risk class, so it catches genuine disclosures without burying users in false warnings.</p>
+
+          <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
+          <div class="taglist" style="margin-top:10px">
+            <span class="tag tag--phosphor">Python</span><span class="tag">scikit-learn</span><span class="tag">NLP</span><span class="tag">pandas</span><span class="tag">TF-IDF</span>
+          </div>
+
+          <p class="sm-label" style="margin-top:24px">What I learned</p>
+          <ul class="md" style="margin-top:10px">
+            <li>The hard part of a safety classifier is the cost asymmetry. A missed disclosure and a false alarm are not the same size of mistake.</li>
+            <li>Synthetic labeling is a modeling decision wearing a disguise. How you define <code>privacy_risk</code> ends up defining the whole system.</li>
+            <li>Privacy tooling has to inform rather than censor. The model's job is to give the user a choice, not take one away.</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- ============ 05 · RETURN RISK (no visual) ============ -->
+      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
+        <span class="card__index">05</span>
+        <div style="max-width:78ch">
+          <span class="tag tag--oxblood"><span class="dot"></span>Machine Learning</span>
+          <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Fashion Subscription Return Risk Predictor</h2>
+          <p class="sm-label" style="color:var(--phosphor)">FIT PREDICTION</p>
+          <p style="margin-top:16px">A decision-support model for a subscription clothing service that estimates, before a box ships, whether each item will be kept or returned. Built on the Rent-the-Runway fit dataset (~82,790 transactions, 47,958 customers, 1,378 items), with the <code>kept_item</code> target derived from fit feedback. The goal: cut return rates and shipping cost without collapsing into safe, boring recommendations.</p>
+          <p>I modeled it in <strong style="color:var(--bone)">Python</strong> using customer measurements, sizes, and product attributes as features, and used <strong style="color:var(--bone)">SQL</strong> joins across the customer, product, and transaction tables to assemble the training set and engineer per-customer fit history.</p>
+
+          <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
+          <div class="taglist" style="margin-top:10px">
+            <span class="tag tag--phosphor">Python</span><span class="tag tag--phosphor">SQL</span><span class="tag">scikit-learn</span><span class="tag">pandas</span><span class="tag">Feature Engineering</span>
+          </div>
+
+          <p class="sm-label" style="margin-top:24px">What I learned</p>
+          <ul class="md" style="margin-top:10px">
+            <li>"Fit" is a relationship, not a property. The features that mattered compared a body to a garment, not either one on its own.</li>
+            <li>Optimizing purely for low returns quietly kills variety, so the real objective is multi-sided.</li>
+            <li>The joins are where the modeling actually happened. Most of the signal came from assembling each customer's history.</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- ============ 06 · VOICE ASSISTANT SENTIMENT ============ -->
+      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
+        <span class="card__index">06</span>
+        <div class="grid grid--2" style="align-items:start">
+          <div>
+            <div class="exhibit">
+              <div class="exhibit__bar"><span class="dots"><i></i><i></i><i></i></span><span class="cap">MODEL · LOGREG vs RANDOM FOREST</span></div>
+              <div class="exhibit__plate exhibit__plate--dark codeplate"><pre><span class="kw">from</span> sklearn.feature_extraction.text <span class="kw">import</span> CountVectorizer
+<span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> LogisticRegression
+<span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> RandomForestClassifier
+
+vec = CountVectorizer()
+X_train_vec = vec.fit_transform(X_train)
+
+<span class="cm"># tune C / n_estimators on a validation split</span>
+model = LogisticRegression(C=c)
+model.fit(X_train_vec, y_train)
+y_val_pred = model.predict(X_val_vec)
+
+<span class="cm"># refit best model on full train, score on held-out test</span>
+print(<span class="st">"Accuracy:"</span>, accuracy_score(y_test, y_test_pred))</pre></div>
+            </div>
+          </div>
+          <div>
+            <span class="tag tag--phosphor"><span class="dot"></span>NLP · Build</span>
+            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Voice Assistant Review Sentiment Classifier</h2>
+            <p class="sm-label" style="color:var(--phosphor)">SENTIMENT MODEL</p>
+            <p style="margin-top:16px">A binary sentiment classifier on Amazon Alexa reviews that predicts whether a written review reflects positive or negative feedback. I compared Logistic Regression against a Random Forest, both over bag-of-words features, tuning each on a dedicated validation split before refitting the best configuration on the full training set and scoring on a held-out test set.</p>
+            <p>Built end-to-end in <strong style="color:var(--bone)">Python / scikit-learn</strong>: <code>CountVectorizer</code> features, a clean train/validation/test protocol, and accuracy / precision / recall reported on data the model never saw during tuning.</p>
+
+            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
+            <div class="taglist" style="margin-top:10px">
+              <span class="tag tag--phosphor">Python</span><span class="tag">scikit-learn</span><span class="tag">pandas</span><span class="tag">Plotly</span><span class="tag">Model Selection</span>
+            </div>
+
+            <p class="sm-label" style="margin-top:24px">What I learned</p>
+            <ul class="md" style="margin-top:10px">
+              <li>A held-out test set is sacred. Every tuning decision belongs to validation, never to the final score.</li>
+              <li>A well-regularized linear model makes a brutally strong baseline, so complexity has to earn its place.</li>
+              <li>Precision and recall, not accuracy, tell you what a sentiment model is really doing on the minority class.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ 07 · IMDB DB ============ -->
+      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
+        <span class="card__index">07</span>
+        <div class="grid grid--2" style="align-items:start">
+          <div>
+            <span class="tag tag--phosphor"><span class="dot"></span>Database · Optimization</span>
+            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">IMDb Database &amp; Query Optimization</h2>
+            <p class="sm-label" style="color:var(--phosphor)">AZURE SQL · QUERY OPTIMIZATION</p>
+            <p style="margin-top:16px">A relational database built over the full public IMDb dataset on Azure SQL. I loaded the raw <code>.tsv</code> exports into a normalized schema (Title, Basics, Principals, Name) and shaped a query workload of real questions, like most-prolific actors, titles by keyword, and films per genre and year.</p>
+            <p>The heart of the project was performance: I benchmarked the workload, found the full-table scans, and tuned runtime with targeted <strong style="color:var(--bone)">SQL</strong> indexes, using covering indexes and composite keys chosen to match each query's join and filter pattern, then re-ran the workload to measure the improvement.</p>
+
+            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
+            <div class="taglist" style="margin-top:10px">
+              <span class="tag tag--phosphor">SQL</span><span class="tag">Azure SQL</span><span class="tag">Schema Design</span><span class="tag">Indexing</span><span class="tag">ETL</span><span class="tag">Query Tuning</span>
+            </div>
+
+            <p class="sm-label" style="margin-top:24px">What I learned</p>
+            <ul class="md" style="margin-top:10px">
+              <li>An index is a bet on a query pattern. Composite keys like <code>(startYear, tconst)</code> only pay off when they match the workload.</li>
+              <li>You can't optimize what you haven't measured, so the benchmark came before every index.</li>
+              <li>Loading messy public data correctly is half the engineering. The schema is where data quality actually gets enforced.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="exhibit">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">SQL · WORKLOAD INDEX TUNING</span></div>
+              <div class="exhibit__plate exhibit__plate--dark codeplate"><pre><span class="cm">-- targeted indexes for the query workload</span>
+<span class="kw">CREATE INDEX</span> onNConst <span class="kw">ON</span> Principals (nconst);
+<span class="kw">CREATE INDEX</span> onTitle  <span class="kw">ON</span> Title (title);
+<span class="kw">CREATE INDEX</span> onGenre  <span class="kw">ON</span> Basics (genres);
+<span class="cm">-- composite, covers filter + key lookup</span>
+<span class="kw">CREATE INDEX</span> onYear   <span class="kw">ON</span> Basics (startYear, tconst);</pre></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ 08 · KING COUNTY METRO ============ -->
+      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
+        <span class="card__index">08</span>
+        <div class="grid grid--2" style="align-items:start">
+          <div>
+            <div class="exhibit">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · ENTITY-RELATIONSHIP DIAGRAM</span></div>
+              <div class="exhibit__plate"><img src="assets/img/erd-kcmetro.png" alt="Entity-relationship diagram for the King County Metro database: Rider, Route, Fare, Bus Operation, Buses, Bus Driver, Calendar" /></div>
+            </div>
+          </div>
+          <div>
+            <span class="tag tag--phosphor"><span class="dot"></span>Database Design</span>
+            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">King County Metro Database</h2>
+            <p class="sm-label" style="color:var(--phosphor)">RELATIONAL DESIGN</p>
+            <p style="margin-top:16px">A relational database designed for King County Metro to address two real problems: accessibility (coverage in underserved areas) and efficiency (route performance and delays). I modeled the full domain (riders, routes, fares, bus operations, vehicles, drivers, and service calendars) into a normalized schema with a complete entity-relationship diagram and relational mapping.</p>
+            <p>The schema is the <strong style="color:var(--bone)">SQL</strong> foundation; on top of it I framed a <strong style="color:var(--bone)">Python (pandas)</strong> analysis layer for the information needs the system exists to serve: ridership demand by route, peak-time performance, and delay patterns. Those are the queries that turn the database into decisions.</p>
+
+            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
+            <div class="taglist" style="margin-top:10px">
+              <span class="tag tag--phosphor">SQL</span><span class="tag tag--phosphor">Python</span><span class="tag">ER Modeling</span><span class="tag">Normalization</span><span class="tag">pandas</span>
+            </div>
+
+            <p class="sm-label" style="margin-top:24px">What I learned</p>
+            <ul class="md" style="margin-top:10px">
+              <li>Good ER modeling is really requirements analysis. Every entity traces back to a stated information need.</li>
+              <li>Normalization is a conversation about which facts are allowed to change independently.</li>
+              <li>A transit schema is also an accessibility statement. What you choose to model is what you can measure and fix later.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ 09 · TENSORFLOW IA ============ -->
+      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
+        <span class="card__index">09</span>
+        <div class="grid grid--2" style="align-items:start">
+          <div>
+            <span class="tag tag--phosphor"><span class="dot"></span>Architecture · Analysis</span>
+            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">TensorFlow Architecture Analysis</h2>
+            <p class="sm-label" style="color:var(--phosphor)">DEVELOPMENT-VIEW STUDY</p>
+            <p style="margin-top:16px">A development-view analysis of the TensorFlow codebase that maps how one of the largest open-source ML frameworks is actually organized, from the <code>tf.*</code> Python frontend that users touch, down through the C API, the C++ core runtime and kernels, the MLIR/XLA compiler stack, and TensorFlow Lite. The deliverable explains the layered dependency structure in plain language.</p>
+            <p>To keep the architecture map honest rather than hand-wavy, I used <strong style="color:var(--bone)">Python</strong> to walk the repository tree, measuring module sizes, mapping import dependencies between packages, and surfacing the real submodule boundaries (<code>eager/</code>, <code>autograph/</code>, <code>grappler/</code>, <code>kernels/</code>) that the write-up is built on.</p>
+
+            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
+            <div class="taglist" style="margin-top:10px">
+              <span class="tag tag--phosphor">Python</span><span class="tag">Repo Analysis</span><span class="tag">Software Architecture</span><span class="tag">Technical Writing</span>
+            </div>
+
+            <p class="sm-label" style="margin-top:24px">What I learned</p>
+            <ul class="md" style="margin-top:10px">
+              <li>Layering is the whole trick. Each layer only depends downward, which is exactly what lets the core change without breaking the bindings.</li>
+              <li>The C API exists as a seam, one translation point so every language binding doesn't have to dig into C++ internals.</li>
+              <li>Reading a giant codebase is a data problem. Scripting the structure beats scrolling through it.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="exhibit">
+              <div class="exhibit__bar"><span class="dots"><i></i><i></i><i></i></span><span class="cap">FIG · TENSORFLOW LAYER STACK</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:20px">
+                <div class="stack">
+                  <div class="stack__layer top"><span class="lt">tensorflow/python/</span><span class="ld">tf.* frontend · keras · autograph</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">tensorflow/c · cc/</span><span class="ld">C API seam · language bindings</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">tensorflow/core/</span><span class="ld">C++ runtime · kernels · graph</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">compiler/ · xla/</span><span class="ld">MLIR · XLA · JIT</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">hardware</span><span class="ld">CPU · GPU · TPU · TF Lite</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ 10 · COVID-19 ============ -->
+      <article class="card card--accent" style="padding:40px; margin-bottom:8px">
+        <span class="card__index">10</span>
+        <div class="grid grid--2" style="align-items:start">
+          <div>
+            <div class="exhibit">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · NEW CASES BY STATE · MAR–MAY 2020</span></div>
+              <div class="exhibit__plate"><img src="assets/img/covid-cases.png" alt="Line chart of new COVID-19 cases per month by US state, March to May 2020, with policy-response markers" /></div>
+            </div>
+          </div>
+          <div>
+            <span class="tag tag--phosphor"><span class="dot"></span>Analysis · Viz</span>
+            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">COVID-19 Regional Analysis</h2>
+            <p class="sm-label" style="color:var(--phosphor)">TRENDS · IMPACT · RESPONSE</p>
+            <p style="margin-top:16px">An analysis of COVID-19 trends, impact, and government responses across US states, tracking new cases over time against the timing of state-level policy responses and showing how differently regions moved through the early pandemic. New York's early spike against the slower curves of other states is the throughline.</p>
+            <p>I worked the data in <strong style="color:var(--bone)">Python (pandas)</strong>, reshaping case and response series and aligning policy-response dates to the case timeline, then used <strong style="color:var(--bone)">SQL</strong> to aggregate cases by state and month before plotting. The chart annotates each state's response date directly onto the case trajectory.</p>
+
+            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
+            <div class="taglist" style="margin-top:10px">
+              <span class="tag tag--phosphor">Python</span><span class="tag tag--phosphor">SQL</span><span class="tag">pandas</span><span class="tag">Matplotlib</span><span class="tag">Time-Series</span>
+            </div>
+
+            <p class="sm-label" style="margin-top:24px">What I learned</p>
+            <ul class="md" style="margin-top:10px">
+              <li>Lining events up against a time series is where the insight lives. The case curve only means something next to the response date.</li>
+              <li>Per-capita versus raw counts changes the story completely, so the framing is an analytical choice, not a neutral one.</li>
+              <li>One well-annotated chart can carry an argument better than a page of tables.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <p class="dim mono" style="text-align:center; font-size:var(--t-xs); letter-spacing:.12em; margin-top:40px">↳ MORE ON GITHUB · GITHUB.COM/SAM-MALIK</p>
+    </section>
+  </main>
+
+  <footer class="footer" id="connect">
+    <div class="footer__inner">
+      <p class="eyebrow"><span class="idx">§ 0.7</span> &nbsp; LET'S CONNECT</p>
+      <h2 class="display" style="margin:12px 0 8px">Get in touch.</h2>
+      <p class="lead" style="margin-bottom:32px">I'm open to data engineering roles and good conversations about pipelines, systems, and what data infrastructure is really for.</p>
+      <div class="connect-grid">
+        <a class="connect-card" href="mailto:samanyumalik@gmail.com"><span class="cc-label">→ Email</span><span class="cc-value">samanyumalik@gmail.com</span></a>
+        <a class="connect-card" href="https://www.linkedin.com/in/" target="_blank" rel="noopener"><span class="cc-label">→ LinkedIn</span><span class="cc-value">/in/sam-malik</span></a>
+        <a class="connect-card" href="https://github.com/" target="_blank" rel="noopener"><span class="cc-label">→ GitHub</span><span class="cc-value">github.com/sam-malik</span></a>
+      </div>
+      <div class="footer__base">
+        <span class="mono">SAM·MALIK · DATA ENGINEER</span>
+        <span class="mono">Built in the ruins of the present.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/main.js"></script>
+</body>
+</html>

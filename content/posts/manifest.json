@@ -1,0 +1,18 @@
+[
+  {
+    "slug": "project-cybersyn",
+    "title": "Project Cybersyn and the Honesty of a Pipeline",
+    "date": "2026-06-12",
+    "index": "¶ 01",
+    "file": "project-cybersyn.md",
+    "summary": "Chile's 1971 real-time economic data platform, read as a modern data pipeline — and what its collapse teaches about data quality and human agency."
+  },
+  {
+    "slug": "exactly-once-is-a-loop",
+    "title": "Exactly-Once Is a Property of the Loop",
+    "date": "2026-04-09",
+    "index": "¶ 02",
+    "file": "exactly-once-is-a-loop.md",
+    "summary": "Why correctness lives in the whole circuit, never in a single component."
+  }
+]

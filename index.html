@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAM·MALIK · Data Engineer</title>
+  <meta name="description" content="Sam Malik — data engineer. ETL/ELT pipelines on Azure, data quality and governance, and agentic AI, built on Python and SQL." />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="sm-grain"></div>
+  <div class="sm-scan"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a class="brand" href="index.html">SAM<span class="middot">·</span>MALIK</a>
+      <button class="nav__toggle">≡ MENU</button>
+      <div class="nav__links">
+        <a href="index.html">Home</a>
+        <a href="#ethos">Ethos</a>
+        <a href="experience.html">Experience</a>
+        <a href="projects.html">Projects</a>
+        <a href="writing.html">Writing</a>
+        <a href="reading.html">Reading</a>
+        <a href="#connect">Connect</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <header class="hero wrap">
+      <p class="eyebrow"><span class="idx">0.0</span> — DATA ENGINEER</p>
+      <h1 class="hero__name" style="margin-top:24px">Sam<span class="middot">·</span>Malik</h1>
+      <p class="lead" style="margin-top:32px; font-size:1.375rem">
+        <span class="display italic" style="color:var(--bone)">Building data infrastructure that's honest about what it measures.</span>
+      </p>
+      <p class="lead" style="margin-top:20px">
+        I'm a data engineer finishing my B.S. in Informatics (Data Science) at the University of Washington.
+        Day to day I build and run ETL/ELT pipelines on Azure with Data Factory, Databricks, and Synapse,
+        write the data-quality and governance checks that keep them trustworthy, and ship agentic RAG systems
+        on the Claude and OpenAI APIs. <span style="color:var(--phosphor)">Python and SQL</span> do most of the work.
+        Mostly the job is taking data that's scattered across a lot of systems and turning it into something
+        teams can actually rely on.
+      </p>
+      <div style="display:flex; gap:16px; margin-top:36px; flex-wrap:wrap">
+        <a class="btn btn--primary" href="projects.html">See the work <span>→</span></a>
+        <a class="btn btn--ghost" href="experience.html">Experience</a>
+        <a class="btn btn--ghost" href="#connect">Get in touch</a>
+      </div>
+      <div class="taglist" style="margin-top:36px">
+        <span class="tag tag--phosphor"><span class="dot"></span>Seattle · 47.6°N</span>
+        <span class="tag">Python</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Azure</span>
+        <span class="tag">Databricks</span>
+        <span class="tag">PySpark</span>
+        <span class="tag">Synapse</span>
+        <span class="tag">RAG / AI Agents</span>
+      </div>
+    </header>
+
+    <!-- MARQUEE -->
+    <div class="marquee" style="margin-top:48px">
+      <div class="marquee__track">
+        <span class="marquee__item">ETL ON AZURE<span class="sep">·</span>EXACT<span class="sep">·</span>IDEMPOTENT<span class="sep">·</span>OBSERVABLE<span class="sep">·</span>DATA QUALITY<span class="sep">·</span>LINEAGE &amp; GOVERNANCE<span class="sep">·</span>AGENTIC RAG<span class="sep">·</span>PYTHON<span class="sep">·</span>SQL<span class="sep">·</span></span>
+        <span class="marquee__item" aria-hidden="true">ETL ON AZURE<span class="sep">·</span>EXACT<span class="sep">·</span>IDEMPOTENT<span class="sep">·</span>OBSERVABLE<span class="sep">·</span>DATA QUALITY<span class="sep">·</span>LINEAGE &amp; GOVERNANCE<span class="sep">·</span>AGENTIC RAG<span class="sep">·</span>PYTHON<span class="sep">·</span>SQL<span class="sep">·</span></span>
+      </div>
+    </div>
+
+    <!-- ETHOS -->
+    <section class="section wrap" id="ethos">
+      <div class="rule rule--accent"><span class="rule__label"><span class="idx">§ 0.1</span> &nbsp; ETHOS</span></div>
+      <p class="eyebrow"><span class="idx">0.1</span> — HOW I THINK ABOUT THE WORK</p>
+      <h2 class="display" style="margin:12px 0 0; font-size:var(--t-h1)">Data, technology, and culture are one loop.</h2>
+      <p class="lead" style="margin-top:20px">
+        I think of data, technology, and culture as one recursive feedback loop, each one constantly rewriting
+        the next. Data engineering is how you step into that loop on purpose.
+      </p>
+
+      <div class="grid grid--2" style="margin-top:40px; align-items:center">
+        <!-- DIAGRAM -->
+        <div class="card" style="padding:36px 24px; background:var(--pitch)">
+          <svg viewBox="0 0 520 460" width="100%" role="img"
+               aria-label="A recursive feedback loop connecting three nodes: Data feeds Technology, Technology shapes Culture, Culture decides Data."
+               style="max-width:520px; margin:0 auto; display:block; font-family:var(--font-mono)">
+            <defs>
+              <filter id="g" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L6,3 L0,6 Z" fill="#c8f24a"/>
+              </marker>
+            </defs>
+
+            <!-- recursive loop arrows (clockwise) -->
+            <g fill="none" stroke="#c8f24a" stroke-width="1.6" filter="url(#g)" marker-end="url(#ah)">
+              <!-- Data -> Technology (top to lower-right) -->
+              <path d="M300,116 A 170 170 0 0 1 372 300"/>
+              <!-- Technology -> Culture (lower-right to lower-left) -->
+              <path d="M330,360 A 170 170 0 0 1 190 360"/>
+              <!-- Culture -> Data (lower-left back to top) -->
+              <path d="M148,300 A 170 170 0 0 1 220 116"/>
+            </g>
+
+            <!-- center label -->
+            <text x="260" y="232" text-anchor="middle" fill="#847f74" font-size="9" letter-spacing="3">RECURSIVE</text>
+            <text x="260" y="248" text-anchor="middle" fill="#555049" font-size="9" letter-spacing="3">FEEDBACK</text>
+
+            <!-- nodes -->
+            <!-- Data (top) -->
+            <g>
+              <rect x="196" y="62" width="128" height="60" fill="#131318" stroke="#c8f24a" stroke-width="1.3"/>
+              <text x="260" y="86" text-anchor="middle" fill="#847f74" font-size="8" letter-spacing="2">§ 01</text>
+              <text x="260" y="106" text-anchor="middle" fill="#ece7d8" font-size="17" font-family="Cormorant, serif">Data</text>
+            </g>
+            <!-- Technology (lower right) -->
+            <g>
+              <rect x="338" y="300" width="150" height="60" fill="#131318" stroke="#c8f24a" stroke-width="1.3"/>
+              <text x="413" y="324" text-anchor="middle" fill="#847f74" font-size="8" letter-spacing="2">§ 02</text>
+              <text x="413" y="344" text-anchor="middle" fill="#ece7d8" font-size="17" font-family="Cormorant, serif">Technology</text>
+            </g>
+            <!-- Culture (lower left) -->
+            <g>
+              <rect x="32" y="300" width="128" height="60" fill="#131318" stroke="#8e1c24" stroke-width="1.3"/>
+              <text x="96" y="324" text-anchor="middle" fill="#847f74" font-size="8" letter-spacing="2">§ 03</text>
+              <text x="96" y="344" text-anchor="middle" fill="#ece7d8" font-size="17" font-family="Cormorant, serif">Culture</text>
+            </g>
+
+            <!-- edge labels -->
+            <text x="392" y="200" text-anchor="middle" fill="#9bbd38" font-size="8.5" letter-spacing="1.5">determines</text>
+            <text x="260" y="402" text-anchor="middle" fill="#9bbd38" font-size="8.5" letter-spacing="1.5">reshapes</text>
+            <text x="128" y="200" text-anchor="middle" fill="#9bbd38" font-size="8.5" letter-spacing="1.5">decides</text>
+          </svg>
+          <p class="sm-label" style="text-align:center; margin-top:20px; color:var(--ash-dim)">FIG. 0.1 — DATA → TECHNOLOGY → CULTURE → DATA</p>
+        </div>
+
+        <!-- WRITEUP -->
+        <div class="md">
+          <p><strong style="color:var(--phosphor); font-family:var(--font-mono); font-size:.82em; letter-spacing:.06em">DATA → TECHNOLOGY.</strong> The data we collect ends up dictating the tools we build to handle it. Around 3400 BCE, Mesopotamian scribes were pressing grain tallies and labor records into clay, and the sheer volume of that accounting is what pushed them to invent cuneiform in the first place. The dataset created the technology.</p>
+
+          <p><strong style="color:var(--phosphor); font-family:var(--font-mono); font-size:.82em; letter-spacing:.06em">TECHNOLOGY → CULTURE.</strong> Those tools then change how people live and what they treat as real. Double-entry bookkeeping in the 15th century was a data technology, and it helped make modern capitalism <em>thinkable</em> in the first place. The census, from Rome to the Domesday Book to today, turned populations into records, and in doing so it reshaped what it even meant to be a citizen of a state.</p>
+
+          <p><strong style="color:var(--oxblood-lift); font-family:var(--font-mono); font-size:.82em; letter-spacing:.06em">CULTURE → DATA.</strong> And culture decides what's worth recording at all, which closes the loop and changes what data exists in the first place. A society that decides something matters starts measuring it. A recommendation system turns your behavior into data, trains on it, and nudges the behavior it was measuring. Same loop the scribes started, just running faster.</p>
+
+          <p>None of this is new. Datafication is one of the constants of recorded human history. What's new is the speed and the stakes. <strong style="color:var(--bone)">Building data infrastructure means stepping into that loop</strong>, deciding what becomes legible and making sure the record stays honest about what it's actually measuring. That's the part I care about most.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INDEX -->
+    <section class="section wrap">
+      <div class="rule"><span class="rule__label"><span class="idx">§ 0.2</span> &nbsp; THE INDEX</span></div>
+      <div class="grid grid--3">
+        <a href="experience.html" class="card card--interactive card--accent" style="text-decoration:none">
+          <span class="card__index">0.3</span>
+          <p class="sm-label">Track record</p>
+          <h3 style="margin:8px 0 12px; font-size:var(--t-h3)">Experience</h3>
+          <p class="dim" style="margin:0">Education, roles, tools, and measurable impact. <span style="color:var(--phosphor)">→</span></p>
+        </a>
+        <a href="projects.html" class="card card--interactive" style="text-decoration:none">
+          <span class="card__index">0.4</span>
+          <p class="sm-label">Built things</p>
+          <h3 style="margin:8px 0 12px; font-size:var(--t-h3)">Projects</h3>
+          <p class="dim" style="margin:0">Pipelines, databases, models, and what I learned building them. <span style="color:var(--phosphor)">→</span></p>
+        </a>
+        <a href="writing.html" class="card card--interactive" style="text-decoration:none">
+          <span class="card__index">0.5</span>
+          <p class="sm-label">Notebook</p>
+          <h3 style="margin:8px 0 12px; font-size:var(--t-h3)">Writing</h3>
+          <p class="dim" style="margin:0">Short essays on data systems, feedback, and governance. <span style="color:var(--phosphor)">→</span></p>
+        </a>
+        <a href="reading.html" class="card card--interactive" style="text-decoration:none">
+          <span class="card__index">0.6</span>
+          <p class="sm-label">The shelf</p>
+          <h3 style="margin:8px 0 12px; font-size:var(--t-h3)">Reading</h3>
+          <p class="dim" style="margin:0">Last, current, next, and what I made of each. <span style="color:var(--phosphor)">→</span></p>
+        </a>
+        <a href="#connect" class="card card--interactive" style="text-decoration:none">
+          <span class="card__index">0.7</span>
+          <p class="sm-label">Signal</p>
+          <h3 style="margin:8px 0 12px; font-size:var(--t-h3)">Connect</h3>
+          <p class="dim" style="margin:0">Email, LinkedIn, GitHub. <span style="color:var(--phosphor)">→</span></p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER / CONNECT -->
+  <footer class="footer" id="connect">
+    <div class="footer__inner">
+      <p class="eyebrow"><span class="idx">§ 0.7</span> &nbsp; LET'S CONNECT</p>
+      <h2 class="display" style="margin:12px 0 8px">Get in touch.</h2>
+      <p class="lead" style="margin-bottom:32px">I'm open to data engineering roles and good conversations about pipelines, systems, and what data infrastructure is really for.</p>
+      <div class="connect-grid">
+        <a class="connect-card" href="mailto:samanyumalik@gmail.com">
+          <span class="cc-label">→ Email</span>
+          <span class="cc-value">samanyumalik@gmail.com</span>
+        </a>
+        <a class="connect-card" href="https://www.linkedin.com/in/" target="_blank" rel="noopener">
+          <span class="cc-label">→ LinkedIn</span>
+          <span class="cc-value">/in/sam-malik</span>
+        </a>
+        <a class="connect-card" href="https://github.com/" target="_blank" rel="noopener">
+          <span class="cc-label">→ GitHub</span>
+          <span class="cc-value">github.com/sam-malik</span>
+        </a>
+      </div>
+      <div class="footer__base">
+        <span class="mono">SAM·MALIK · DATA ENGINEER</span>
+        <span class="mono">Built in the ruins of the present.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/main.js"></script>
+</body>
+</html>

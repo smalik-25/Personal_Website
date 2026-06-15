@@ -1,0 +1,23 @@
+[
+  {
+    "status": "last",
+    "title": "Anti-Oedipus",
+    "author": "Deleuze & Guattari",
+    "year": "1972",
+    "file": "last.md"
+  },
+  {
+    "status": "current",
+    "title": "America",
+    "author": "Jean Baudrillard",
+    "year": "1986",
+    "file": "current.md"
+  },
+  {
+    "status": "next",
+    "title": "Flatline Constructs",
+    "author": "Mark Fisher",
+    "year": "1999",
+    "file": "next.md"
+  }
+]
