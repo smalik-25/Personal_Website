@@ -51,6 +51,55 @@
 
     <section class="section wrap">
 
+      <!-- ============ 00 · SNEAKER RESALE INTELLIGENCE (featured) ============ -->
+      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
+        <span class="card__index">00</span>
+        <div class="grid grid--2" style="align-items:start">
+          <div>
+            <span class="tag tag--phosphor"><span class="dot"></span>Data Engineering · Live</span>
+            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Sneaker Resale Intelligence</h2>
+            <p class="sm-label" style="color:var(--phosphor)">RESALE WAREHOUSE · LIVE DASHBOARD</p>
+            <p style="margin-top:16px">An end-to-end data engineering project that turns real resale data into an analytical warehouse and a live dashboard. It answers the questions I actually find interesting about the resale market: which sneakers carry the highest premium over retail, how that premium decays after a release, and how it varies across sizes and silhouettes. The pipeline ingests about 100K real StockX resale sales, plus Google Trends as a live demand signal, through typed <strong style="color:var(--bone)">Python</strong> clients, lands them as raw JSON, and bulk-loads them into a hand-written <strong style="color:var(--bone)">PostgreSQL</strong> star schema through an idempotent loader.</p>
+            <p>From there, dbt transforms the raw tables across staging, intermediate, and mart layers, computing the premium economics with <strong style="color:var(--bone)">SQL</strong> window functions. A thin Streamlit dashboard reads the marts directly, so every figure on screen traces back to a tested, modeled table. It's built in public with a clean commit history and full-pipeline CI, with a deployed instance on Streamlit Community Cloud backed by Neon Postgres.</p>
+
+            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
+            <div class="taglist" style="margin-top:10px">
+              <span class="tag tag--phosphor">Python</span><span class="tag tag--phosphor">SQL</span><span class="tag">PostgreSQL</span><span class="tag">dbt</span><span class="tag">Streamlit</span><span class="tag">Star Schema</span><span class="tag">Window Functions</span><span class="tag">CI/CD</span>
+            </div>
+
+            <p class="sm-label" style="margin-top:24px">What I learned</p>
+            <ul class="md" style="margin-top:10px">
+              <li>The decision I spent the most time on wasn't code, it was data sourcing. I started with live APIs (eBay, Reddit) and a tempting StockX scraper, then realized a fragile live feed is a bad foundation for something I want to demo reliably. Choosing a real public dataset as the backbone, and reframing the API clients as documented, tested, future-ready extensions, taught me that "real data" doesn't have to mean "live API."</li>
+              <li>The engineering lessons were all about getting the boring things right: putting idempotency in the schema (natural-key constraints plus <code>ON CONFLICT DO NOTHING</code>) rather than the loader, keeping one clear grain per fact table instead of unioning mismatched sources, and computing a metric like premium exactly once in an intermediate model so every downstream model agrees.</li>
+              <li>A sharp reminder that <code>execute_values</code> reports only its last page's row count, which sent me to <code>RETURNING</code> to report loads honestly.</li>
+              <li>Deploying against a managed Postgres surfaced the real-world details: SSL modes, pooled versus direct connections for DDL, and Google rate-limiting live Trends pulls.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="exhibit">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · PIPELINE ARCHITECTURE</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:20px">
+                <div class="stack">
+                  <div class="stack__layer"><span class="lt">Sources</span><span class="ld">StockX ~100K sales · Google Trends</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">Ingest</span><span class="ld">typed Python clients → raw JSON</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">Load</span><span class="ld">idempotent loader → Postgres star schema</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">Transform</span><span class="ld">dbt · staging → intermediate → marts</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer top"><span class="lt">Serve</span><span class="ld">Streamlit dashboard · reads marts</span></div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap">
+              <a class="btn btn--primary" href="https://sneaker-intel-2.streamlit.app/" target="_blank" rel="noopener">Open live dashboard <span>→</span></a>
+              <a class="btn btn--ghost" href="https://github.com/smalik-25/sneaker-intel" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
+            </div>
+          </div>
+        </div>
+      </article>
+
       <!-- ============ 01 · HRIS ============ -->
       <article class="card card--accent" style="padding:40px; margin-bottom:40px">
         <span class="card__index">01</span>
