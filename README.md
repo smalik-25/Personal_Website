@@ -53,6 +53,22 @@ The gray panels are `.visref` placeholders. To use a real image, replace a
 - Update the placeholder bio, roles, projects, and the LinkedIn/GitHub URLs
   (search for `linkedin.com/in/` and `github.com/` across the `.html` files).
 
+## Last.fm live feed (Listening section)
+
+The "LAST.FM · LIVE FEED" card pulls recent scrobbles live from the Last.fm API.
+To turn it on:
+
+1. Get a free API key at https://www.last.fm/api/account/create (any app name; callback can be blank).
+2. Open `index.html`, find this line near the bottom, and paste the key:
+   ```html
+   <script>window.LASTFM_USER = "tequila_sunset"; window.LASTFM_API_KEY = "";</script>
+   ```
+3. That's it. The widget fetches `user.getRecentTracks` on load and refreshes every 60s,
+   showing a "NOW PLAYING" row when you're listening.
+
+The key is read-only public data, so it's safe to ship in the page. Until a key is added,
+the card shows a short "add a key" note instead of breaking.
+
 ## Deploy to GitHub Pages
 1. Push the contents of `site/` to a repo (or put them at the repo root).
 2. Settings → Pages → deploy from branch → root.
