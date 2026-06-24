@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SAM·MALIK · Data Engineer</title>
-  <meta name="description" content="Sam Malik — data engineer. ETL/ELT pipelines on Azure, data quality and governance, and agentic AI, built on Python and SQL." />
+  <title>SAM·MALIK</title>
+  <meta name="description" content="Sam Malik — data, music, and clothes. Records and ratings, shows, secondhand grails, and the data work behind it all." />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
@@ -19,20 +19,19 @@
       <div class="nav__links">
         <a href="index.html">Home</a>
         <a href="#ethos">Ethos</a>
+        <a href="#reading">Reading</a>
+        <a href="#writing">Writing</a>
+        <a href="#music">Listening</a>
         <a href="experience.html">Doing</a>
         <a href="projects.html">Building</a>
-        <a href="writing.html">Writing</a>
-        <a href="reading.html">Reading</a>
-        <a href="#music">Listening</a>
-        <a href="#connect">Connect</a>
       </div>
     </div>
   </nav>
 
   <main>
-    <!-- HERO -->
+    <!-- HERO / BIO -->
     <header class="hero wrap">
-      <p class="eyebrow"><span class="idx">0.0</span> — SEATTLE, WA<span class="caret"></span></p>
+      <p class="eyebrow"><span class="idx">0.0</span> — MUSIC · FASHION · DATA<span class="caret"></span></p>
       <h1 class="hero__name glitch" style="margin-top:24px">Sam<span class="middot">·</span>Malik</h1>
       <div class="hero-split" style="margin-top:36px">
         <div>
@@ -40,24 +39,74 @@
             <span class="display italic" style="color:var(--bone)">Loud taste, quiet systems.</span>
           </p>
           <p class="lead" style="margin-top:20px">
-            I'm Sam. I just finished a data science degree at UW, and somewhere in there I lost a hundred pounds
-            and got obsessive about a handful of things: Rick Owens and the whole industrial, accelerationist
-            aesthetic; Death Grips, who I'd put just about anything on the line to see live; and the colder end of
-            metal. When I'm not working or building something with data, I'm at the gym, deep in a thrift store or
-            an archive popup, or nursing a matcha too long. Equal parts Dionysian and Apollonian, which is probably
-            why I'm drawn to both loud rooms and quiet systems.
+            I just finished a data science degree at UW, and somewhere in there I lost a hundred pounds and got
+            obsessive about a handful of things: Rick Owens and the whole industrial, accelerationist aesthetic;
+            Death Grips, who I'd put just about anything on the line to see live; and the colder end of metal. When
+            I'm not working or building something with data, I'm at the gym, deep in a thrift store or an archive
+            popup, or nursing a matcha too long. Equal parts Apollonian and Dionysian.
           </p>
           <div style="display:flex; gap:16px; margin-top:36px; flex-wrap:wrap">
             <a class="btn btn--primary" href="projects.html">See the work <span>→</span></a>
-            <a class="btn btn--ghost" href="experience.html">Doing</a>
+            <a class="btn btn--ghost" href="#music">Listening</a>
             <a class="btn btn--ghost" href="#connect">Get in touch</a>
           </div>
         </div>
-        <div class="bio-figure-wrap">
-          <img class="bio-figure" src="assets/img/bio-figure.png" alt="Vintage cutaway illustration: a human body beside a body built from machines" onerror="this.closest('.bio-figure-wrap').style.display='none'" />
+        <div>
+          <div class="bio-figure-wrap">
+            <img class="bio-figure" src="assets/img/bio-figure.png" alt="Vintage cutaway illustration: a human body beside a body built from machines" onerror="this.closest('.bio-figure-wrap').style.display='none'" />
+          </div>
+          <!-- SESSION REPLAY (live) -->
+          <div class="sessionlog" aria-hidden="true">
+            <div class="sl-head"><span class="dots"><i class="live"></i><i></i><i></i></span><span>SESSION_REPLAY.log</span><span class="sl-count" id="sl-count">0 events</span></div>
+            <div class="sl-body" id="sl-body"></div>
+            <div class="sl-readout"><span>cursor</span><span>x&nbsp;<b id="sl-x">000</b></span><span>y&nbsp;<b id="sl-y">000</b></span></div>
+          </div>
         </div>
       </div>
     </header>
+
+    <!-- INDEX -->
+    <section class="section wrap">
+      <div class="rule"><span class="rule__label"><span class="idx">§ 0.0</span> &nbsp; THE INDEX</span></div>
+      <div class="grid grid--3">
+        <a href="#ethos" class="card card--interactive" style="text-decoration:none">
+          <span class="card__index">01</span>
+          <p class="sm-label">Approach</p>
+          <h3 style="margin:8px 0 12px; font-size:var(--t-h3)">Ethos</h3>
+          <p class="dim" style="margin:0">How I connect data, technology, and culture. <span style="color:var(--phosphor)">→</span></p>
+        </a>
+        <a href="#reading" class="card card--interactive" style="text-decoration:none">
+          <span class="card__index">02</span>
+          <p class="sm-label">The shelf</p>
+          <h3 style="margin:8px 0 12px; font-size:var(--t-h3)">Reading</h3>
+          <p class="dim" style="margin:0">Last, current, next, and what I made of each. <span style="color:var(--phosphor)">→</span></p>
+        </a>
+        <a href="#writing" class="card card--interactive" style="text-decoration:none">
+          <span class="card__index">03</span>
+          <p class="sm-label">Notebook</p>
+          <h3 style="margin:8px 0 12px; font-size:var(--t-h3)">Writing</h3>
+          <p class="dim" style="margin:0">Short essays on data, music, and culture. <span style="color:var(--phosphor)">→</span></p>
+        </a>
+        <a href="#music" class="card card--interactive" style="text-decoration:none">
+          <span class="card__index">04</span>
+          <p class="sm-label">On rotation</p>
+          <h3 style="margin:8px 0 12px; font-size:var(--t-h3)">Listening</h3>
+          <p class="dim" style="margin:0">Now playing, all-time favorites, recent ratings. <span style="color:var(--phosphor)">→</span></p>
+        </a>
+        <a href="experience.html" class="card card--interactive" style="text-decoration:none">
+          <span class="card__index">05</span>
+          <p class="sm-label">Track record</p>
+          <h3 style="margin:8px 0 12px; font-size:var(--t-h3)">Doing</h3>
+          <p class="dim" style="margin:0">Education, roles, tools, and measurable impact. <span style="color:var(--phosphor)">→</span></p>
+        </a>
+        <a href="projects.html" class="card card--interactive card--accent" style="text-decoration:none">
+          <span class="card__index">06</span>
+          <p class="sm-label">Built things</p>
+          <h3 style="margin:8px 0 12px; font-size:var(--t-h3)">Building</h3>
+          <p class="dim" style="margin:0">Pipelines, databases, models, and what I learned. <span style="color:var(--phosphor)">→</span></p>
+        </a>
+      </div>
+    </section>
 
     <!-- ETHOS -->
     <section class="section wrap" id="ethos">
@@ -83,38 +132,26 @@
                 <path d="M0,0 L6,3 L0,6 Z" fill="#c8f24a"/>
               </marker>
             </defs>
-
-            <!-- recursive loop arrows (clockwise) -->
             <g fill="none" stroke="#c8f24a" stroke-width="1.6" filter="url(#g)" marker-end="url(#ah)">
-              <!-- Data -> Technology (top to lower-right) -->
               <path d="M300,116 A 170 170 0 0 1 372 300"/>
-              <!-- Technology -> Culture (lower-right to lower-left) -->
               <path d="M330,360 A 170 170 0 0 1 190 360"/>
-              <!-- Culture -> Data (lower-left back to top) -->
               <path d="M148,300 A 170 170 0 0 1 220 116"/>
             </g>
-
-            <!-- nodes -->
-            <!-- Data (top) -->
             <g>
               <rect x="196" y="62" width="128" height="60" fill="#131318" stroke="#c8f24a" stroke-width="1.3"/>
               <text x="260" y="86" text-anchor="middle" fill="#847f74" font-size="8" letter-spacing="2">§ 01</text>
               <text x="260" y="106" text-anchor="middle" fill="#ece7d8" font-size="17" font-family="Cormorant, serif">Data</text>
             </g>
-            <!-- Technology (lower right) -->
             <g>
               <rect x="338" y="300" width="150" height="60" fill="#131318" stroke="#c8f24a" stroke-width="1.3"/>
               <text x="413" y="324" text-anchor="middle" fill="#847f74" font-size="8" letter-spacing="2">§ 02</text>
               <text x="413" y="344" text-anchor="middle" fill="#ece7d8" font-size="17" font-family="Cormorant, serif">Technology</text>
             </g>
-            <!-- Culture (lower left) -->
             <g>
               <rect x="32" y="300" width="128" height="60" fill="#131318" stroke="#8e1c24" stroke-width="1.3"/>
               <text x="96" y="324" text-anchor="middle" fill="#847f74" font-size="8" letter-spacing="2">§ 03</text>
               <text x="96" y="344" text-anchor="middle" fill="#ece7d8" font-size="17" font-family="Cormorant, serif">Culture</text>
             </g>
-
-            <!-- edge labels -->
             <text x="392" y="200" text-anchor="middle" fill="#9bbd38" font-size="8.5" letter-spacing="1.5">determines</text>
             <text x="260" y="402" text-anchor="middle" fill="#9bbd38" font-size="8.5" letter-spacing="1.5">reshapes</text>
             <text x="128" y="200" text-anchor="middle" fill="#9bbd38" font-size="8.5" letter-spacing="1.5">decides</text>
@@ -135,47 +172,29 @@
       </div>
     </section>
 
-    <!-- INDEX -->
-    <section class="section wrap">
-      <div class="rule"><span class="rule__label"><span class="idx">§ 0.2</span> &nbsp; THE INDEX</span></div>
-      <div class="grid grid--3">
-        <a href="experience.html" class="card card--interactive card--accent" style="text-decoration:none">
-          <span class="card__index">0.3</span>
-          <p class="sm-label">Track record</p>
-          <h3 style="margin:8px 0 12px; font-size:var(--t-h3)">Doing</h3>
-          <p class="dim" style="margin:0">Education, roles, tools, and measurable impact. <span style="color:var(--phosphor)">→</span></p>
-        </a>
-        <a href="projects.html" class="card card--interactive" style="text-decoration:none">
-          <span class="card__index">0.4</span>
-          <p class="sm-label">Built things</p>
-          <h3 style="margin:8px 0 12px; font-size:var(--t-h3)">Building</h3>
-          <p class="dim" style="margin:0">Pipelines, databases, models, and what I learned building them. <span style="color:var(--phosphor)">→</span></p>
-        </a>
-        <a href="writing.html" class="card card--interactive" style="text-decoration:none">
-          <span class="card__index">0.5</span>
-          <p class="sm-label">Notebook</p>
-          <h3 style="margin:8px 0 12px; font-size:var(--t-h3)">Writing</h3>
-          <p class="dim" style="margin:0">Short essays on data systems, feedback, and governance. <span style="color:var(--phosphor)">→</span></p>
-        </a>
-        <a href="reading.html" class="card card--interactive" style="text-decoration:none">
-          <span class="card__index">0.6</span>
-          <p class="sm-label">The shelf</p>
-          <h3 style="margin:8px 0 12px; font-size:var(--t-h3)">Reading</h3>
-          <p class="dim" style="margin:0">Last, current, next, and what I made of each. <span style="color:var(--phosphor)">→</span></p>
-        </a>
-        <a href="#connect" class="card card--interactive" style="text-decoration:none">
-          <span class="card__index">0.7</span>
-          <p class="sm-label">Signal</p>
-          <h3 style="margin:8px 0 12px; font-size:var(--t-h3)">Connect</h3>
-          <p class="dim" style="margin:0">Email, LinkedIn, GitHub. <span style="color:var(--phosphor)">→</span></p>
-        </a>
-      </div>
+    <!-- READING -->
+    <section class="section wrap" id="reading">
+      <div class="rule rule--accent"><span class="rule__label"><span class="idx">§ 0.2</span> &nbsp; READING</span></div>
+      <p class="eyebrow"><span class="idx">0.2</span> — READING</p>
+      <h2 class="display" style="margin:12px 0 0; font-size:var(--t-h1)">What I'm reading.</h2>
+      <p class="lead" style="margin-top:20px">Last, current, next, and what I made of each. The other input, alongside the records.</p>
+      <div id="shelf" class="shelf" style="margin-top:32px"><p class="loading">Loading the shelf…</p></div>
     </section>
 
-    <!-- OFF THE CLOCK: MUSIC -->
+    <!-- WRITING -->
+    <section class="section wrap" id="writing">
+      <div class="rule rule--accent"><span class="rule__label"><span class="idx">§ 0.3</span> &nbsp; WRITING</span></div>
+      <p class="eyebrow"><span class="idx">0.3</span> — WRITING</p>
+      <h2 class="display" style="margin:12px 0 0; font-size:var(--t-h1)">Notes &amp; essays.</h2>
+      <p class="lead" style="margin-top:20px">Short writeups on data, music, and whatever I'm chewing on. The stuff that doesn't fit on a résumé.</p>
+      <div id="post-list" style="margin-top:24px"><p class="loading">Loading writing…</p></div>
+      <article id="post-reader" class="md" style="display:none"></article>
+    </section>
+
+    <!-- LISTENING -->
     <section class="section wrap" id="music">
-      <div class="rule rule--accent"><span class="rule__label"><span class="idx">§ 0.8</span> &nbsp; OFF THE CLOCK</span></div>
-      <p class="eyebrow"><span class="idx">0.8</span> — LISTENING</p>
+      <div class="rule rule--accent"><span class="rule__label"><span class="idx">§ 0.4</span> &nbsp; LISTENING</span></div>
+      <p class="eyebrow"><span class="idx">0.4</span> — LISTENING</p>
       <h2 class="display" style="margin:12px 0 0; font-size:var(--t-h1)">The music.</h2>
       <p class="lead" style="margin-top:20px">My taste sits at two poles: warped, maximal rap on one side and the coldest end of black and drone metal on the other. Up top is whatever's actually playing right now, then the all-time list and what I've rated lately.</p>
 
@@ -218,10 +237,12 @@
           <p class="mono" style="margin:14px 0 0; font-size:var(--t-micro); color:var(--ash-dim); letter-spacing:.08em">SYNCED FROM RYM · NOV 2025</p>
         </div>
       </div>
+    </section>
 
-      <!-- CONCERT LOG -->
-      <div class="rule" style="margin-top:56px"><span class="rule__label"><span class="idx">§ 0.9</span> &nbsp; CONCERT LOG</span></div>
-      <p class="eyebrow"><span class="idx">0.9</span> — ROOMS FULL OF FOG</p>
+    <!-- CONCERT LOG -->
+    <section class="section wrap" id="concert">
+      <div class="rule rule--accent"><span class="rule__label"><span class="idx">§ 0.5</span> &nbsp; CONCERT LOG</span></div>
+      <p class="eyebrow"><span class="idx">0.5</span> — ROOMS FULL OF FOG</p>
       <h2 class="display" style="margin:12px 0 0; font-size:var(--t-h1)">Concert log.</h2>
       <p class="lead" style="margin-top:20px">Some of the best rooms I've stood in. Featured: <span style="color:var(--bone)">Sunn O)))</span>, <span style="color:var(--bone)">Travis Scott</span>, and <span style="color:var(--bone)">Carcass</span>.</p>
       <div class="gallery" style="margin-top:24px">
@@ -240,7 +261,7 @@
   <!-- FOOTER / CONNECT -->
   <footer class="footer" id="connect">
     <div class="footer__inner">
-      <p class="eyebrow"><span class="idx">§ 0.7</span> &nbsp; LET'S CONNECT</p>
+      <p class="eyebrow"><span class="idx">§ 0.6</span> &nbsp; LET'S CONNECT</p>
       <h2 class="display" style="margin:12px 0 8px">Get in touch.</h2>
       <p class="lead" style="margin-bottom:32px">I'm open to data analyst and data engineering roles, and good conversations about data, music, or what infrastructure is really for. Say hi.</p>
       <div class="connect-grid">
@@ -258,15 +279,18 @@
         </a>
       </div>
       <div class="footer__base">
-        <span class="mono">SAM·MALIK · DATA ENGINEER</span>
+        <span class="mono">SAM·MALIK</span>
         <span class="mono">Built in the ruins of the present.</span>
       </div>
     </div>
   </footer>
 
   <script src="assets/main.js"></script>
-  <!-- Last.fm live feed. Get a free key at https://www.last.fm/api/account/create and paste it below. -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="assets/content.js"></script>
+  <!-- Last.fm live feed -->
   <script>window.LASTFM_USER = "tequila_sunset"; window.LASTFM_API_KEY = "1ed506e22015e8c55ee67b63f9b16a57";</script>
   <script src="assets/lastfm.js"></script>
+  <script src="assets/session.js"></script>
 </body>
 </html>

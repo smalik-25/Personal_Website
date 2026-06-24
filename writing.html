@@ -6,6 +6,8 @@
   <title>Writing · SAM·MALIK</title>
   <meta name="description" content="Short essays by Sam Malik on data systems, feedback, and governance." />
   <link rel="stylesheet" href="assets/styles.css" />
+  <!-- This page is the single-post reader. Without a ?post= it lives on the home page. -->
+  <script>if (!/[?&]post=/.test(location.search)) { location.replace('index.html#writing'); }</script>
 </head>
 <body>
   <div class="sm-grain"></div>
@@ -18,12 +20,11 @@
       <div class="nav__links">
         <a href="index.html">Home</a>
         <a href="index.html#ethos">Ethos</a>
+        <a href="index.html#reading">Reading</a>
+        <a href="index.html#writing">Writing</a>
+        <a href="index.html#music">Listening</a>
         <a href="experience.html">Doing</a>
         <a href="projects.html">Building</a>
-        <a href="writing.html">Writing</a>
-        <a href="reading.html">Reading</a>
-        <a href="index.html#music">Listening</a>
-        <a href="#connect">Connect</a>
       </div>
     </div>
   </nav>

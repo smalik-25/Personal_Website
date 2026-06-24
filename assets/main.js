@@ -22,4 +22,13 @@
   // Page-rise transition on the main element
   var main = document.querySelector('main');
   if (main) main.classList.add('page-rise');
+
+  // Graceful placeholders for concert photos not yet added
+  document.querySelectorAll('.gallery .shot img').forEach(function (img) {
+    img.addEventListener('error', function () {
+      img.style.display = 'none';
+      var shot = img.closest('.shot');
+      if (shot) shot.classList.add('shot--empty');
+    });
+  });
 })();

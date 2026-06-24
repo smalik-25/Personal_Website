@@ -41,7 +41,7 @@
       return r.text();
     }).then(function (text) {
       postReader.innerHTML =
-        '<a href="writing.html" class="sm-label" style="display:inline-block;margin-bottom:24px">← ALL WRITING</a>' +
+        '<a href="index.html#writing" class="sm-label" style="display:inline-block;margin-bottom:24px">← ALL WRITING</a>' +
         '<p class="eyebrow"><span class="idx">' + esc(post.index || '¶') + '</span> &nbsp;' + esc(post.date) + '</p>' +
         '<h1 style="margin:8px 0 32px">' + esc(post.title) + '</h1>' +
         '<div class="md">' + md(text) + '</div>';
