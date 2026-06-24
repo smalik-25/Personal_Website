@@ -73,9 +73,9 @@
   var shelf = document.getElementById('shelf');
   if (shelf) {
     var STATUS = {
-      last: { label: 'LAST READ', cls: 'last' },
-      current: { label: 'READING NOW', cls: 'now' },
-      next: { label: 'UP NEXT', cls: 'next' }
+      last: { label: 'PAST', cls: 'last' },
+      current: { label: 'PRESENT', cls: 'now' },
+      next: { label: 'FUTURE', cls: 'next' }
     };
     fetch('content/reading/manifest.json').then(function (r) { return r.json(); })
       .then(function (books) {
@@ -90,13 +90,13 @@
             if (i > 0) html += '<div class="shelf-arrow" aria-hidden="true">→</div>';
             html +=
               '<article class="book">' +
-              '<div class="book__cover ' + (b.status === 'current' ? 'book__cover--current' : '') + '">' +
-              '<span class="spine"></span><span class="ct">' + esc(b.title) + '</span></div>' +
               '<div class="book__status ' + s.cls + '">' + s.label + '</div>' +
-              '<div class="book__author">' + esc(b.author) + (b.year ? ' &nbsp;·&nbsp; ' + esc(b.year) : '') + '</div>' +
-              '<div class="md" style="font-size:.95rem">' + md(texts[i] || '_No notes yet._') + '</div>' +
+              '<h3 class="book__title">' + esc(b.title) + '</h3>' +
+              '<div class="book__author">' + esc(b.author) + (b.year ? ' &middot; ' + esc(b.year) : '') + '</div>' +
+              '<div class="md" style="font-size:.95rem; margin-top:10px">' + md(texts[i] || '_No notes yet._') + '</div>' +
               '</article>';
           });
+          shelf.classList.add('shelf--flow');
           shelf.innerHTML = html;
         });
       })

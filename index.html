@@ -35,19 +35,21 @@
       <h1 class="hero__name glitch" style="margin-top:24px">Sam<span class="middot">·</span>Malik</h1>
       <div class="hero-split" style="margin-top:36px">
         <div>
-          <p class="lead" style="font-size:1.375rem; margin:0">
-            <span class="display italic" style="color:var(--bone)">Loud taste, quiet systems.</span>
+          <p style="font-size:1.7rem; line-height:1.18; margin:0">
+            <span class="display italic" style="color:var(--bone)">Loud Taste. Quiet Systems.</span>
           </p>
-          <p class="lead" style="margin-top:20px">
-            I just finished a data science degree at UW, and somewhere in there I lost a hundred pounds and got
-            obsessive about a handful of things: Rick Owens and the whole industrial, accelerationist aesthetic;
-            Death Grips, who I'd put just about anything on the line to see live; and the colder end of metal. When
-            I'm not working or building something with data, I'm at the gym, deep in a thrift store or an archive
-            popup, or nursing a matcha too long. Equal parts Apollonian and Dionysian.
+          <p class="lead" style="margin-top:22px">
+            Just finished a data science degree at UW. Somehow lost a 100 pounds. Currently obsessed with: Rick
+            Owens, Death Grips, Hedi Slimane, Nick Land, Stafford Beer, Sunn O))). Sweltering theory and glacial
+            soundscapes. Hot data and cold pipelines. Big boots and skinny jeans. Equal parts Apollonian and
+            Dionysian.
           </p>
-          <div style="display:flex; gap:16px; margin-top:36px; flex-wrap:wrap">
+          <div class="nowworking">
+            <p class="sm-label" style="color:var(--phosphor)">Currently working on</p>
+            <p style="margin:8px 0 0; color:var(--bone-dim)">An analytics project that links my own body's data (DEXA scans, Apple Health, calorie logs) to population baselines to quantify DEXA measurement uncertainty, reconciling it with energy balance and aggregate data.</p>
+          </div>
+          <div style="display:flex; gap:16px; margin-top:28px; flex-wrap:wrap">
             <a class="btn btn--primary" href="projects.html">See the work <span>→</span></a>
-            <a class="btn btn--ghost" href="#music">Listening</a>
             <a class="btn btn--ghost" href="#connect">Get in touch</a>
           </div>
         </div>
@@ -57,9 +59,18 @@
           </div>
           <!-- SESSION REPLAY (live) -->
           <div class="sessionlog" aria-hidden="true">
-            <div class="sl-head"><span class="dots"><i class="live"></i><i></i><i></i></span><span>SESSION_REPLAY.log</span><span class="sl-count" id="sl-count">0 events</span></div>
+            <div class="sl-bar">
+              <span class="sl-lights"><i class="r"></i><i class="y"></i><i class="g"></i></span>
+              <span class="sl-name">SESSION_REPLAY.log</span>
+              <span class="sl-count" id="sl-count">0 events</span>
+            </div>
             <div class="sl-body" id="sl-body"></div>
-            <div class="sl-readout"><span>cursor</span><span>x&nbsp;<b id="sl-x">000</b></span><span>y&nbsp;<b id="sl-y">000</b></span></div>
+            <div class="sl-prompt"><span class="sl-caret"></span></div>
+            <div class="sl-readout">
+              <span class="sl-rk">cursor</span>
+              <span class="sl-rv">x <b id="sl-x">000</b></span>
+              <span class="sl-rv">y <b id="sl-y">000</b></span>
+            </div>
           </div>
         </div>
       </div>
