@@ -352,6 +352,29 @@ p { margin: 0 0 var(--sp-4); }
 .connect-card .cc-label { font-family: var(--font-mono); font-size: var(--t-micro); letter-spacing: .14em; text-transform: uppercase; color: var(--ash); }
 .connect-card .cc-value { color: var(--bone); font-family: var(--font-mono); font-size: var(--t-sm); word-break: break-all; }
 
+/* ---------- Music / RateYourMusic widget ---------- */
+.rym-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(214px, 1fr)); gap: var(--sp-3); }
+.rym-card { position: relative; border: var(--bw-hair) solid var(--hairline); background: var(--slab); padding: var(--sp-4); border-radius: var(--r-sm); transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), background var(--dur) var(--ease); }
+.rym-card:hover { border-color: var(--hairline-2); background: var(--slab-2); transform: translateY(-2px); }
+.rym-card .rc-idx { position: absolute; top: 10px; right: 12px; font-family: var(--font-mono); font-size: var(--t-micro); color: var(--ash-dim); letter-spacing: .1em; }
+.rym-card .rc-artist { font-family: var(--font-display); font-size: var(--t-h3); color: var(--bone); line-height: 1.04; padding-right: 18px; }
+.rym-card .rc-album { font-family: var(--font-mono); font-size: var(--t-micro); letter-spacing: .1em; text-transform: uppercase; color: var(--ash); margin-top: 8px; }
+.rym-card .rc-album b { color: var(--phosphor-dim); font-weight: 500; }
+.rym-recent { list-style: none; padding: 0; margin: 0; }
+.rym-recent li { display: flex; justify-content: space-between; align-items: baseline; gap: var(--sp-3); padding: var(--sp-3) 0; border-top: var(--bw-hair) solid var(--hairline); }
+.rym-recent li:last-child { border-bottom: var(--bw-hair) solid var(--hairline); }
+.rym-recent .rr-title { color: var(--bone-dim); font-size: var(--t-sm); }
+.rym-recent .rr-title b { color: var(--bone); font-weight: 500; }
+.rym-recent .rr-year { font-family: var(--font-mono); font-size: var(--t-xs); color: var(--ash); white-space: nowrap; }
+
+/* ---------- Concert gallery ---------- */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: var(--sp-2); }
+.gallery .shot { display: block; aspect-ratio: 4/5; overflow: hidden; border: var(--bw-hair) solid var(--hairline); background: var(--pitch); position: relative; }
+.gallery .shot img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.2) contrast(1.03); transition: transform var(--dur-slow) var(--ease), filter var(--dur); display: block; }
+.gallery .shot:hover img { transform: scale(1.05); filter: grayscale(0) contrast(1.05); }
+.gallery .shot--wide { grid-column: span 2; aspect-ratio: 16/10; }
+@media (max-width: 860px) { .gallery .shot--wide { grid-column: span 1; aspect-ratio: 4/5; } }
+
 /* ---------- Footer ---------- */
 .footer { border-top: var(--bw-hair) solid var(--hairline); background: var(--pitch); margin-top: var(--sp-9); }
 .footer__inner { max-width: var(--maxw); margin: 0 auto; padding: var(--sp-8) var(--sp-6); }
