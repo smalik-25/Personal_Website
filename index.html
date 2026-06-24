@@ -58,14 +58,14 @@
             <img class="bio-figure" src="assets/img/bio-figure.png" alt="Vintage cutaway illustration: a human body beside a body built from machines" onerror="this.closest('.bio-figure-wrap').style.display='none'" />
           </div>
           <!-- SESSION REPLAY (live) -->
-          <div class="sessionlog" aria-hidden="true">
+          <div class="sessionlog" id="sessionlog" role="group" aria-label="Interactive session replay terminal">
             <div class="sl-bar">
               <span class="sl-lights"><i class="r"></i><i class="y"></i><i class="g"></i></span>
-              <span class="sl-name">SESSION_REPLAY.log</span>
+              <span class="sl-name" id="sl-name">SESSION_REPLAY.log</span>
               <span class="sl-count" id="sl-count">0 events</span>
             </div>
             <div class="sl-body" id="sl-body"></div>
-            <div class="sl-prompt"><span class="sl-caret"></span></div>
+            <div class="sl-prompt"><span class="sl-pfx">&gt;</span><input id="sl-input" class="sl-input" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="terminal input" placeholder="click and type 'help'" /><span class="sl-caret"></span></div>
             <div class="sl-readout">
               <span class="sl-rk">cursor</span>
               <span class="sl-rv">x <b id="sl-x">000</b></span>

@@ -416,9 +416,17 @@ p { margin: 0 0 var(--sp-4); }
 .sl-tag.g { color: var(--phosphor); }
 .sl-tag.w { color: var(--signal-warn); }
 .sl-tag.b { color: var(--signal-info); }
-.sl-prompt { padding: 2px 13px 11px; }
-.sl-prompt::before { content: ">"; color: var(--phosphor); margin-right: 7px; font-size: 11px; }
-.sl-prompt .sl-caret { display: inline-block; width: .5em; height: 1em; background: var(--phosphor); box-shadow: var(--glow-sm); vertical-align: -.14em; animation: blink 1.1s steps(1) infinite; }
+.sl-prompt { display: flex; align-items: center; gap: 7px; padding: 4px 13px 11px; }
+.sl-prompt .sl-pfx { color: var(--phosphor); font-size: 11px; flex: 0 0 auto; }
+.sl-input { flex: 1 1 auto; min-width: 0; background: transparent; border: none; outline: none; color: var(--bone); font-family: var(--font-mono); font-size: 11px; padding: 0; caret-color: transparent; }
+.sl-input::placeholder { color: var(--ash-dim); }
+.sl-prompt .sl-caret { display: inline-block; width: .5em; height: 1em; background: var(--phosphor); box-shadow: var(--glow-sm); flex: 0 0 auto; margin-left: -4px; animation: blink 1.1s steps(1) infinite; }
+.sessionlog.is-term { border-color: var(--phosphor-dim); }
+.sessionlog.is-term .sl-input { caret-color: var(--phosphor); }
+.sessionlog.is-term .sl-prompt .sl-caret { display: none; }
+.sessionlog.is-term .sl-body { max-height: 210px; overflow-y: auto; }
+.sl-tag.s { color: var(--ash); }
+.sl-tag.c { color: var(--bone); }
 .sl-readout { display: flex; align-items: center; gap: 20px; padding: 11px 13px; border-top: var(--bw-hair) solid var(--hairline); background: #0e0e13; }
 .sl-readout .sl-rk { font-size: var(--t-micro); letter-spacing: .18em; text-transform: uppercase; color: var(--ash); }
 .sl-readout .sl-rv { font-size: var(--t-xs); letter-spacing: .1em; text-transform: uppercase; color: var(--ash); }
