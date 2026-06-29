@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Selected Projects · SAM·MALIK</title>
-  <meta name="description" content="Selected data engineering, database, and machine-learning projects by Sam Malik — built on Python and SQL." />
+  <meta name="description" content="Selected data engineering, MLOps, database, and machine-learning projects by Sam Malik — built on Python and SQL." />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
@@ -32,81 +32,28 @@
       <p class="eyebrow"><span class="idx">0.4</span> — BUILDING</p>
       <h1>Selected projects.</h1>
       <p class="lead" style="margin-top:24px">
-        Each of these started as a real question. My own body's measurement noise, resale pricing, privacy,
+        Each of these started as a real question. Resale pricing, my own body's measurement noise, privacy,
         a pandemic. The work was building the data infrastructure and analysis to actually answer it, end to end.
         Almost all of them run on <span style="color:var(--phosphor)">Python and SQL</span>, from warehouses and
-        relational design on one side to pandas and scikit-learn modeling on the other.
+        MLOps pipelines on one side to relational design and modeling on the other.
       </p>
       <div class="taglist" style="margin-top:28px">
         <span class="tag tag--phosphor">Python</span>
         <span class="tag tag--phosphor">SQL</span>
         <span class="tag">dbt</span>
+        <span class="tag">PySpark</span>
+        <span class="tag">MLflow</span>
+        <span class="tag">Airflow</span>
         <span class="tag">BigQuery</span>
         <span class="tag">scikit-learn</span>
-        <span class="tag">Tableau</span>
-        <span class="tag">Database Design</span>
-        <span class="tag">NLP</span>
       </div>
     </header>
 
     <section class="section wrap">
 
-      <!-- ============ 00 · DATA-DRIVEN FITNESS (featured) ============ -->
+      <!-- ============ 00 · SNEAKER RESALE INTELLIGENCE ============ -->
       <article class="card card--accent" style="padding:40px; margin-bottom:40px">
         <span class="card__index">00</span>
-        <div class="grid grid--2" style="align-items:start">
-          <div>
-            <span class="tag tag--phosphor"><span class="dot"></span>Data Engineering · Live</span>
-            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Data-Driven Fitness</h2>
-            <p class="sm-label" style="color:var(--phosphor)">BODY DATA × POPULATION BASELINES</p>
-            <p style="margin-top:16px">An end-to-end data engineering and analytics project that links my own body data (two DEXA scans, Apple Health, calorie and protein logs, tracked lifts) to population baselines from NHANES and ACSM, to answer five concrete physiology questions. The hook: my two DEXA scans sit a month apart and report a −9.8 lb fat, +8.4 lb lean change, which is biologically implausible over 30 days. So instead of plotting the numbers and calling it a body recomposition, the project quantifies the measurement uncertainty, shows where the real change sits inside the instrument's noise floor, and reconciles what's left against energy balance and population data.</p>
-            <p>Under the hood it's a proper warehouse. <strong style="color:var(--bone)">Python</strong> and Polars stream-parse the 328 MB Apple Health XML and the NHANES files into bronze Parquet; <strong style="color:var(--bone)">dbt</strong> builds silver and gold marts across two targets (DuckDB for private local dev, BigQuery for the de-identified public layer) with tests and contracts; Airflow orchestrates ingest → build → test → analyze → dashboard; and an Evidence.dev site serves it publicly. Raw health data never leaves the machine, so only de-identified aggregates reach the cloud and the repo.</p>
-
-            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
-            <div class="taglist" style="margin-top:10px">
-              <span class="tag tag--phosphor">Python</span><span class="tag tag--phosphor">SQL</span><span class="tag">Polars</span><span class="tag">dbt</span><span class="tag">DuckDB</span><span class="tag">BigQuery</span><span class="tag">Airflow</span><span class="tag">Evidence.dev</span><span class="tag">CI/CD</span>
-            </div>
-
-            <p class="sm-label" style="margin-top:24px">What I learned</p>
-            <ul class="md" style="margin-top:10px">
-              <li>The headline finding is a measurement-uncertainty result: the +8.4 lb "lean gain" is mostly glycogen and hydration water (about 4.1 lb), not muscle. At most ~4.3 lb is plausible newbie muscle in a month. Honest analysis meant decomposing the number before celebrating it.</li>
-              <li>A contract on <code>fct_daily</code> with a guaranteed grain and fixed types let the marts and the analysis trust their inputs, which is what makes the uncertainty math defensible.</li>
-              <li>The DuckDB-dev / BigQuery-prod split was a privacy and dev/prod-parity choice, not a scale one. It keeps raw data on my machine and exposes only aggregates to the cloud and the public site.</li>
-              <li>Airflow is overkill for a single-machine pipeline. I used it for the recognizable, production-shaped orchestration and the discipline it forces.</li>
-            </ul>
-          </div>
-          <div>
-            <div class="exhibit" style="margin-bottom:16px">
-              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">LIVE DASHBOARD · DEXA, DECOMPOSED</span></div>
-              <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/fitness-dashboard.png" alt="Data Driven Fitness dashboard — the DEXA lean and fat change decomposed against measurement uncertainty and population baselines" /></div>
-            </div>
-            <div class="exhibit">
-              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · PIPELINE ARCHITECTURE</span></div>
-              <div class="exhibit__plate exhibit__plate--dark" style="padding:20px">
-                <div class="stack">
-                  <div class="stack__layer"><span class="lt">Sources</span><span class="ld">Apple Health XML · DEXA · LoseIt · Strong · NHANES</span></div>
-                  <div class="stack__arrow">↓</div>
-                  <div class="stack__layer"><span class="lt">Ingest</span><span class="ld">Python + Polars → bronze Parquet</span></div>
-                  <div class="stack__arrow">↓</div>
-                  <div class="stack__layer"><span class="lt">Warehouse</span><span class="ld">dbt · DuckDB dev → silver / gold marts</span></div>
-                  <div class="stack__arrow">↓</div>
-                  <div class="stack__layer"><span class="lt">Promote</span><span class="ld">de-identified marts → BigQuery prod</span></div>
-                  <div class="stack__arrow">↓</div>
-                  <div class="stack__layer top"><span class="lt">Serve</span><span class="ld">Evidence.dev dashboard · Airflow-orchestrated</span></div>
-                </div>
-              </div>
-            </div>
-            <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap">
-              <a class="btn btn--primary" href="https://data-driven-fitness.netlify.app/" target="_blank" rel="noopener">Open live dashboard <span>→</span></a>
-              <a class="btn btn--ghost" href="https://github.com/smalik-25/data-driven-fitness" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- ============ 01 · SNEAKER RESALE INTELLIGENCE ============ -->
-      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">01</span>
         <div class="grid grid--2" style="align-items:start">
           <div>
             <span class="tag tag--phosphor"><span class="dot"></span>Data Engineering · Live</span>
@@ -157,9 +104,110 @@
         </div>
       </article>
 
-      <!-- ============ 02 · DIGITAL I-D ============ -->
+      <!-- ============ 01 · SNEAKER PRICE MLOPS PIPELINE (Phase 2) ============ -->
+      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
+        <span class="card__index">01</span>
+        <div class="grid grid--2" style="align-items:start">
+          <div>
+            <span class="tag tag--phosphor"><span class="dot"></span>MLOps · Machine Learning</span>
+            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Sneaker Price MLOps Pipeline</h2>
+            <p class="sm-label" style="color:var(--phosphor)">SNEAKER-INTEL · PHASE 2</p>
+            <p style="margin-top:16px">The deliberate Phase 2 of Sneaker Resale Intelligence. That project built the data-engineering foundation, a hand-written Postgres star schema over ~99K StockX sales with a full dbt layer. This one builds the ML layer on top of it: an end-to-end MLOps pipeline that predicts a sneaker's resale price premium. The model itself is a plain feedforward net on purpose. The whole point is everything around it, the parts that have to hold up to a "why did you build it that way" question, in reliability, reproducibility, and scale.</p>
+            <p>Stages pass typed Parquet through an S3 data lake and talk to each other only by path: <strong style="color:var(--bone)">PySpark</strong> feature engineering (premiums, rolling signals, demand), <strong style="color:var(--bone)">Pandera</strong> validation as a data contract, <strong style="color:var(--bone)">Ray Train + PyTorch</strong> for distributed training, and <strong style="color:var(--bone)">MLflow</strong> for experiment tracking and staged model promotion, all orchestrated by an <strong style="color:var(--bone)">Airflow</strong> DAG that owns the topology but none of the logic. One fsspec I/O layer means the exact same code runs against S3 in production and local disk in CI.</p>
+
+            <div class="grid grid--3" style="margin:24px 0">
+              <div class="datafield"><span class="df-label">Real StockX sales</span><span class="df-value">99,956</span></div>
+              <div class="datafield"><span class="df-label">Val RMSE</span><span class="df-value">≈ 0.21</span></div>
+              <div class="datafield"><span class="df-label">Validation row retention</span><span class="df-value">100<span class="unit">%</span></span></div>
+            </div>
+
+            <p class="sm-label" style="margin-top:8px">Tools &amp; skills</p>
+            <div class="taglist" style="margin-top:10px">
+              <span class="tag tag--phosphor">Python</span><span class="tag">PySpark</span><span class="tag">PyTorch</span><span class="tag">Ray Train</span><span class="tag">MLflow</span><span class="tag">Airflow</span><span class="tag">Pandera</span><span class="tag">AWS S3</span><span class="tag">CI/CD</span>
+            </div>
+
+            <p class="sm-label" style="margin-top:24px">What I learned</p>
+            <ul class="md" style="margin-top:10px">
+              <li>Airflow should own the topology, not the logic. Each task just calls a stage's <code>run()</code>, state passes between stages only as S3 paths, and the heavy libraries import inside the callables so the DAG parses fast and stays testable without Spark or Torch installed.</li>
+              <li>A temporal train/val split is non-negotiable for forecasting. Training on earlier sales and validating on later ones is the only honest way to judge a model that has to predict forward in time. A random split leaks the future.</li>
+              <li>Promotion should be a gate, not a default. Every run is registered for lineage, but the <code>staging</code> alias only moves on a strict val-RMSE improvement, and every decision leaves a <code>promotion_report.json</code>.</li>
+              <li>Real data is the real test. Connecting the live warehouse surfaced four contract mismatches the synthetic fixtures had hidden (release-type vocabulary, premium outliers at 20× retail, transaction grain, pre-release sales). Pandera caught each one, and I fixed each as a documented config change.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="exhibit" style="margin-bottom:16px">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">AIRFLOW DAG · SNEAKER_TRAINING_PIPELINE</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/ml-pipeline-dag.png" alt="Airflow DAG: ingest → feature_engineering → validate → train → register, each a PythonOperator" /></div>
+            </div>
+            <div class="exhibit" style="margin-bottom:16px">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">EXPERIMENT TRACKING · RUN METRICS</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/ml-pipeline-runs.png" alt="Experiment tracking for the sneaker-price-model run: train_loss, val_loss, and val_rmse over training steps" /></div>
+            </div>
+            <div class="exhibit">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">HYPERPARAMETER SWEEP · VAL RMSE</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/ml-pipeline-sweep.png" alt="Parallel-coordinates hyperparameter sweep over hidden_dim and learning_rate, colored by final validation RMSE" /></div>
+            </div>
+            <a class="btn btn--primary" style="margin-top:16px" href="https://github.com/smalik-25/ML-Training-Pipeline" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ 02 · DATA-DRIVEN FITNESS ============ -->
       <article class="card card--accent" style="padding:40px; margin-bottom:40px">
         <span class="card__index">02</span>
+        <div class="grid grid--2" style="align-items:start">
+          <div>
+            <span class="tag tag--phosphor"><span class="dot"></span>Data Engineering · Live</span>
+            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Data-Driven Fitness</h2>
+            <p class="sm-label" style="color:var(--phosphor)">BODY DATA × POPULATION BASELINES</p>
+            <p style="margin-top:16px">An end-to-end data engineering and analytics project that links my own body data (two DEXA scans, Apple Health, calorie and protein logs, tracked lifts) to population baselines from NHANES and ACSM, to answer five concrete physiology questions. The hook: my two DEXA scans sit a month apart and report a −9.8 lb fat, +8.4 lb lean change, which is biologically implausible over 30 days. So instead of plotting the numbers and calling it a body recomposition, the project quantifies the measurement uncertainty, shows where the real change sits inside the instrument's noise floor, and reconciles what's left against energy balance and population data.</p>
+            <p>Under the hood it's a proper warehouse. <strong style="color:var(--bone)">Python</strong> and Polars stream-parse the 328 MB Apple Health XML and the NHANES files into bronze Parquet; <strong style="color:var(--bone)">dbt</strong> builds silver and gold marts across two targets (DuckDB for private local dev, BigQuery for the de-identified public layer) with tests and contracts; Airflow orchestrates ingest → build → test → analyze → dashboard; and an Evidence.dev site serves it publicly. Raw health data never leaves the machine, so only de-identified aggregates reach the cloud and the repo.</p>
+
+            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
+            <div class="taglist" style="margin-top:10px">
+              <span class="tag tag--phosphor">Python</span><span class="tag tag--phosphor">SQL</span><span class="tag">Polars</span><span class="tag">dbt</span><span class="tag">DuckDB</span><span class="tag">BigQuery</span><span class="tag">Airflow</span><span class="tag">Evidence.dev</span><span class="tag">CI/CD</span>
+            </div>
+
+            <p class="sm-label" style="margin-top:24px">What I learned</p>
+            <ul class="md" style="margin-top:10px">
+              <li>The headline finding is a measurement-uncertainty result: the +8.4 lb "lean gain" is mostly glycogen and hydration water (about 4.1 lb), not muscle. At most ~4.3 lb is plausible newbie muscle in a month. Honest analysis meant decomposing the number before celebrating it.</li>
+              <li>A contract on <code>fct_daily</code> with a guaranteed grain and fixed types let the marts and the analysis trust their inputs, which is what makes the uncertainty math defensible.</li>
+              <li>The DuckDB-dev / BigQuery-prod split was a privacy and dev/prod-parity choice, not a scale one. It keeps raw data on my machine and exposes only aggregates to the cloud and the public site.</li>
+              <li>Airflow is overkill for a single-machine pipeline. I used it for the recognizable, production-shaped orchestration and the discipline it forces.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="exhibit" style="margin-bottom:16px">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">LIVE DASHBOARD · DEXA, DECOMPOSED</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/fitness-dashboard.png" alt="Data Driven Fitness dashboard — the DEXA lean and fat change decomposed against measurement uncertainty and population baselines" /></div>
+            </div>
+            <div class="exhibit">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · PIPELINE ARCHITECTURE</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:20px">
+                <div class="stack">
+                  <div class="stack__layer"><span class="lt">Sources</span><span class="ld">Apple Health XML · DEXA · LoseIt · Strong · NHANES</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">Ingest</span><span class="ld">Python + Polars → bronze Parquet</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">Warehouse</span><span class="ld">dbt · DuckDB dev → silver / gold marts</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">Promote</span><span class="ld">de-identified marts → BigQuery prod</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer top"><span class="lt">Serve</span><span class="ld">Evidence.dev dashboard · Airflow-orchestrated</span></div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap">
+              <a class="btn btn--primary" href="https://data-driven-fitness.netlify.app/" target="_blank" rel="noopener">Open live dashboard <span>→</span></a>
+              <a class="btn btn--ghost" href="https://github.com/smalik-25/data-driven-fitness" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ 03 · DIGITAL I-D ============ -->
+      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
+        <span class="card__index">03</span>
         <div class="grid grid--2" style="align-items:start">
           <div>
             <span class="tag tag--phosphor"><span class="dot"></span>Data Science · Web</span>
@@ -220,9 +268,9 @@
         </div>
       </article>
 
-      <!-- ============ 03 · GRAILED ============ -->
+      <!-- ============ 04 · GRAILED ============ -->
       <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">03</span>
+        <span class="card__index">04</span>
         <div class="grid grid--2" style="align-items:start">
           <div>
             <div class="exhibit">
@@ -253,9 +301,9 @@
         </div>
       </article>
 
-      <!-- ============ 04 · TENSORFLOW IA ============ -->
+      <!-- ============ 05 · TENSORFLOW IA ============ -->
       <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">04</span>
+        <span class="card__index">05</span>
         <div class="grid grid--2" style="align-items:start">
           <div>
             <span class="tag tag--phosphor"><span class="dot"></span>Architecture · Analysis</span>
@@ -298,9 +346,9 @@
         </div>
       </article>
 
-      <!-- ============ 05 · HRIS ============ -->
+      <!-- ============ 06 · HRIS ============ -->
       <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">05</span>
+        <span class="card__index">06</span>
         <div class="grid grid--2" style="align-items:start">
           <div>
             <span class="tag tag--phosphor"><span class="dot"></span>Systems Design · DB</span>
@@ -332,9 +380,9 @@
 
       <div class="rule rule--accent"><span class="rule__label"><span class="idx">§</span> &nbsp; DATABASES &amp; SQL</span></div>
 
-      <!-- ============ 06 · IMDB DB ============ -->
+      <!-- ============ 07 · IMDB DB ============ -->
       <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">06</span>
+        <span class="card__index">07</span>
         <div class="grid grid--2" style="align-items:start">
           <div>
             <span class="tag tag--phosphor"><span class="dot"></span>Database · Optimization</span>
@@ -369,9 +417,9 @@
         </div>
       </article>
 
-      <!-- ============ 07 · KING COUNTY METRO ============ -->
+      <!-- ============ 08 · KING COUNTY METRO ============ -->
       <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">07</span>
+        <span class="card__index">08</span>
         <div class="grid grid--2" style="align-items:start">
           <div>
             <div class="exhibit">
@@ -403,9 +451,9 @@
 
       <div class="rule rule--accent"><span class="rule__label"><span class="idx">§</span> &nbsp; MACHINE LEARNING</span></div>
 
-      <!-- ============ 08 · PRIVACY REVIEW DETECTOR (no visual) ============ -->
+      <!-- ============ 09 · PRIVACY REVIEW DETECTOR (no visual) ============ -->
       <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">08</span>
+        <span class="card__index">09</span>
         <div style="max-width:78ch">
           <span class="tag tag--oxblood"><span class="dot"></span>NLP · Machine Learning</span>
           <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Privacy-Aware Fashion Review Risk Detector</h2>
@@ -427,9 +475,9 @@
         </div>
       </article>
 
-      <!-- ============ 09 · RETURN RISK (no visual) ============ -->
+      <!-- ============ 10 · RETURN RISK (no visual) ============ -->
       <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">09</span>
+        <span class="card__index">10</span>
         <div style="max-width:78ch">
           <span class="tag tag--oxblood"><span class="dot"></span>Machine Learning</span>
           <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Fashion Subscription Return Risk Predictor</h2>
@@ -451,9 +499,9 @@
         </div>
       </article>
 
-      <!-- ============ 10 · VOICE ASSISTANT SENTIMENT ============ -->
+      <!-- ============ 11 · VOICE ASSISTANT SENTIMENT ============ -->
       <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">10</span>
+        <span class="card__index">11</span>
         <div class="grid grid--2" style="align-items:start">
           <div>
             <div class="exhibit">
@@ -498,9 +546,9 @@ print(<span class="st">"Accuracy:"</span>, accuracy_score(y_test, y_test_pred))<
 
       <div class="rule rule--accent"><span class="rule__label"><span class="idx">§</span> &nbsp; ANALYSIS &amp; MORE</span></div>
 
-      <!-- ============ 11 · COVID-19 ============ -->
+      <!-- ============ 12 · COVID-19 ============ -->
       <article class="card card--accent" style="padding:40px; margin-bottom:8px">
-        <span class="card__index">11</span>
+        <span class="card__index">12</span>
         <div class="grid grid--2" style="align-items:start">
           <div>
             <div class="exhibit">
