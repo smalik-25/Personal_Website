@@ -113,7 +113,7 @@
             <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Sneaker Price MLOps Pipeline</h2>
             <p class="sm-label" style="color:var(--phosphor)">SNEAKER-INTEL · PHASE 2</p>
             <p style="margin-top:16px">The deliberate Phase 2 of Sneaker Resale Intelligence. That project built the data-engineering foundation, a hand-written Postgres star schema over ~99K StockX sales with a full dbt layer. This one builds the ML layer on top of it: an end-to-end MLOps pipeline that predicts a sneaker's resale price premium. The model itself is a plain feedforward net on purpose. The whole point is everything around it, the parts that have to hold up to a "why did you build it that way" question, in reliability, reproducibility, and scale.</p>
-            <p>Stages pass typed Parquet through an S3 data lake and talk to each other only by path: <strong style="color:var(--bone)">PySpark</strong> feature engineering (premiums, rolling signals, demand), <strong style="color:var(--bone)">Pandera</strong> validation as a data contract, <strong style="color:var(--bone)">Ray Train + PyTorch</strong> for distributed training, and <strong style="color:var(--bone)">MLflow</strong> for experiment tracking and staged model promotion, all orchestrated by an <strong style="color:var(--bone)">Airflow</strong> DAG that owns the topology but none of the logic. One fsspec I/O layer means the exact same code runs against S3 in production and local disk in CI.</p>
+            <p>The topology is a chain of stages that talk to each other only through typed Parquet at an S3 path. An ingest stage acts as an anti-corruption layer over the sneaker-intel Postgres star schema (or synthetic fixtures in dev and CI) and lands a raw zone partitioned by <code>run_date</code>. <strong style="color:var(--bone)">PySpark</strong> builds the feature set partitioned by brand; <strong style="color:var(--bone)">Pandera</strong> validates it as a data contract and writes a validation report; <strong style="color:var(--bone)">Ray Train + PyTorch</strong> trains the regression net to <code>model.pt</code> while logging to <strong style="color:var(--bone)">MLflow</strong> tracking; and a register stage promotes the run into the MLflow registry as <code>sneaker-price-model @staging</code>. An <strong style="color:var(--bone)">Airflow</strong> DAG threads the whole thing with XCom paths, owning the topology but none of the logic, and one fsspec I/O layer means the same code runs against S3 in prod and local disk in CI.</p>
 
             <div class="grid grid--3" style="margin:24px 0">
               <div class="datafield"><span class="df-label">Real StockX sales</span><span class="df-value">99,956</span></div>
@@ -136,16 +136,16 @@
           </div>
           <div>
             <div class="exhibit" style="margin-bottom:16px">
-              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">AIRFLOW DAG · SNEAKER_TRAINING_PIPELINE</span></div>
-              <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/ml-pipeline-dag.png" alt="Airflow DAG: ingest → feature_engineering → validate → train → register, each a PythonOperator" /></div>
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · PIPELINE TOPOLOGY</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/pipeline_topology.png" alt="End-to-end pipeline topology: sneaker-intel Postgres star schema and synthetic fixtures feed an ingest anti-corruption layer, into a raw zone of Parquet by run_date, then PySpark features partitioned by brand, Pandera validation with a validation report, Ray Train + PyTorch producing model.pt and MLflow tracking, then a register stage promoting to the MLflow registry as sneaker-price-model @staging, all orchestrated by an Airflow DAG" /></div>
             </div>
             <div class="exhibit" style="margin-bottom:16px">
-              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">EXPERIMENT TRACKING · RUN METRICS</span></div>
-              <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/ml-pipeline-runs.png" alt="Experiment tracking for the sneaker-price-model run: train_loss, val_loss, and val_rmse over training steps" /></div>
-            </div>
-            <div class="exhibit">
               <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">HYPERPARAMETER SWEEP · VAL RMSE</span></div>
               <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/ml-pipeline-sweep.png" alt="Parallel-coordinates hyperparameter sweep over hidden_dim and learning_rate, colored by final validation RMSE" /></div>
+            </div>
+            <div class="exhibit">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">AIRFLOW DAG · SNEAKER_TRAINING_PIPELINE</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/ml-pipeline-dag.png" alt="Airflow DAG: ingest → feature_engineering → validate → train → register, each a PythonOperator" /></div>
             </div>
             <a class="btn btn--primary" style="margin-top:16px" href="https://github.com/smalik-25/ML-Training-Pipeline" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
           </div>
