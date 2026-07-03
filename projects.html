@@ -499,47 +499,98 @@
         </div>
       </article>
 
-      <!-- ============ 11 · VOICE ASSISTANT SENTIMENT ============ -->
+      <!-- ============ 11 · VOICE ASSISTANT SENTIMENT (revamped) ============ -->
       <article class="card card--accent" style="padding:40px; margin-bottom:40px">
         <span class="card__index">11</span>
         <div class="grid grid--2" style="align-items:start">
           <div>
-            <div class="exhibit">
-              <div class="exhibit__bar"><span class="dots"><i></i><i></i><i></i></span><span class="cap">MODEL · LOGREG vs RANDOM FOREST</span></div>
-              <div class="exhibit__plate exhibit__plate--dark codeplate"><pre><span class="kw">from</span> sklearn.feature_extraction.text <span class="kw">import</span> CountVectorizer
-<span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> LogisticRegression
-<span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> RandomForestClassifier
-
-vec = CountVectorizer()
-X_train_vec = vec.fit_transform(X_train)
-
-<span class="cm"># tune C / n_estimators on a validation split</span>
-model = LogisticRegression(C=c)
-model.fit(X_train_vec, y_train)
-y_val_pred = model.predict(X_val_vec)
-
-<span class="cm"># refit best model on full train, score on held-out test</span>
-print(<span class="st">"Accuracy:"</span>, accuracy_score(y_test, y_test_pred))</pre></div>
-            </div>
-          </div>
-          <div>
-            <span class="tag tag--phosphor"><span class="dot"></span>NLP · Build</span>
+            <span class="tag tag--phosphor"><span class="dot"></span>ML Lifecycle · Live</span>
             <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Voice Assistant Review Sentiment Classifier</h2>
-            <p class="sm-label" style="color:var(--phosphor)">SENTIMENT MODEL</p>
-            <p style="margin-top:16px">A binary sentiment classifier on Amazon Alexa reviews that predicts whether a written review reflects positive or negative feedback. I compared Logistic Regression against a Random Forest, both over bag-of-words features, tuning each on a dedicated validation split before refitting the best configuration on the full training set and scoring on a held-out test set.</p>
-            <p>Built end-to-end in <strong style="color:var(--bone)">Python / scikit-learn</strong>: <code>CountVectorizer</code> features, a clean train/validation/test protocol, and accuracy / precision / recall reported on data the model never saw during tuning.</p>
+            <p class="sm-label" style="color:var(--phosphor)">REPRODUCIBLE ML · HONEST METRICS</p>
+            <p style="margin-top:16px">A binary sentiment classifier on Amazon Alexa reviews, rebuilt as a full ML lifecycle rather than a model. The identity of the project is reproducible experimentation infrastructure and honest metrics, not the models themselves. The first thing I checked was what the <code>feedback</code> label actually is, and it turned out to be the whole project: <code>feedback == 1</code> if and only if <code>rating ≥ 3</code>, so the label is a hard threshold on the star count, not human sentiment. The data is about 92% positive, which makes accuracy a trap, so everything is reported against a majority baseline, negative class first.</p>
+            <p>Around that sits the infrastructure: dataset curation with a <strong style="color:var(--bone)">Pandera</strong> schema that enforces the label rule itself, a config-driven harness that runs cross-validated experiments across <strong style="color:var(--bone)">scikit-learn, PyTorch, and TensorFlow</strong> through one shared evaluation function, <strong style="color:var(--bone)">MLflow</strong> tracking, PR-AUC model selection with bootstrap confidence intervals, a containerized <strong style="color:var(--bone)">FastAPI</strong> service deployed live on a Hugging Face Space, drift monitoring on PSI/KS, and CI that lints, tests, and builds the image on every push.</p>
 
-            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
-            <div class="taglist" style="margin-top:10px">
-              <span class="tag tag--phosphor">Python</span><span class="tag">scikit-learn</span><span class="tag">pandas</span><span class="tag">Plotly</span><span class="tag">Model Selection</span>
+            <div class="grid grid--3" style="margin:24px 0">
+              <div class="datafield"><span class="df-label">Curated reviews</span><span class="df-value">2,384<span class="unit"> · 8.6% neg</span></span></div>
+              <div class="datafield"><span class="df-label">Best PR-AUC</span><span class="df-value">0.575<span class="unit"> vs 0.086</span></span></div>
+              <div class="datafield"><span class="df-label">Frameworks</span><span class="df-value" style="font-size:var(--t-body)">sklearn · torch · TF</span></div>
+            </div>
+
+            <p class="sm-label">Tools &amp; skills</p>
+            <div class="taglist" style="margin:10px 0 0">
+              <span class="tag tag--phosphor">Python</span><span class="tag">scikit-learn</span><span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">MLflow</span><span class="tag">Pandera</span><span class="tag">FastAPI</span><span class="tag">Docker</span><span class="tag">CI/CD</span>
             </div>
 
             <p class="sm-label" style="margin-top:24px">What I learned</p>
             <ul class="md" style="margin-top:10px">
-              <li>A held-out test set is sacred. Every tuning decision belongs to validation, never to the final score.</li>
-              <li>A well-regularized linear model makes a brutally strong baseline, so complexity has to earn its place.</li>
-              <li>Precision and recall, not accuracy, tell you what a sentiment model is really doing on the minority class.</li>
+              <li>The label was the whole project. Once I saw <code>feedback</code> was just a thresholded star rating, the right questions followed: what does accuracy hide, and which rows actually need a text model at all.</li>
+              <li>The most useful part was catching my own error. Selecting on cross-validated negative recall collapsed the linear model into a degenerate "always negative" predictor. Switching selection to PR-AUC, which is threshold-independent, fixed it. Model selection and the decision threshold are two separate choices.</li>
+              <li>The result worth reporting wasn't a win. I bootstrapped the PR-AUC, and the control's interval [0.42, 0.72] was wide enough that the neural nets sat inside it, so I stopped claiming the linear model beats them and started saying it matches them at a fraction of the complexity.</li>
+              <li>On a small, imbalanced dataset a regularized linear model is hard to beat. The deep-learning variants earned their keep as evidence that the harness is framework-agnostic and the finding holds across backends.</li>
             </ul>
+          </div>
+          <div>
+            <div class="exhibit" style="margin-bottom:16px">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">ABLATION · NEG CLASS, RANKED BY PR-AUC</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:16px">
+                <table style="width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:var(--t-xs)">
+                  <thead>
+                    <tr style="color:var(--ash); letter-spacing:.04em">
+                      <th style="padding:6px 6px; border-bottom:1px solid var(--hairline); font-weight:500; text-align:left">model</th>
+                      <th style="padding:6px 6px; border-bottom:1px solid var(--hairline); font-weight:500; text-align:right">PR-AUC</th>
+                      <th style="padding:6px 6px; border-bottom:1px solid var(--hairline); font-weight:500; text-align:right">neg rec</th>
+                      <th style="padding:6px 6px; border-bottom:1px solid var(--hairline); font-weight:500; text-align:right">spec</th>
+                    </tr>
+                  </thead>
+                  <tbody style="color:var(--bone-dim)">
+                    <tr style="color:var(--phosphor)">
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:left">sklearn logreg (L2)</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">0.575</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">0.244</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">0.991</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:left">PyTorch MLP</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">0.526</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">0.415</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">0.961</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:left">TensorFlow MLP</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">0.523</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">0.390</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">0.963</td>
+                    </tr>
+                    <tr style="color:var(--ash-dim)">
+                      <td style="padding:6px 6px; text-align:left">majority baseline</td>
+                      <td style="padding:6px 6px; text-align:right">0.086</td>
+                      <td style="padding:6px 6px; text-align:right">0.000</td>
+                      <td style="padding:6px 6px; text-align:right">1.000</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="exhibit">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · ML LIFECYCLE</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:20px">
+                <div class="stack">
+                  <div class="stack__layer"><span class="lt">Curate + Validate</span><span class="ld">Pandera schema · curated.parquet</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">Harness</span><span class="ld">config-driven · seeded · MLflow</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">Variants</span><span class="ld">sklearn · PyTorch · TensorFlow</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">Select</span><span class="ld">ablation · PR-AUC · bootstrap CIs</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer top"><span class="lt">Serve</span><span class="ld">FastAPI · Docker · Hugging Face Space</span></div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap">
+              <a class="btn btn--primary" href="https://smalik25-voice-assistant-review-sentiment-classifier.hf.space" target="_blank" rel="noopener">Try the live demo <span>→</span></a>
+              <a class="btn btn--ghost" href="https://github.com/smalik-25/Voice-Assistant-Review-Sentiment-Classifier" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
+            </div>
           </div>
         </div>
       </article>
