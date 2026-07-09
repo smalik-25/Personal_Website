@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Selected Projects · SAM·MALIK</title>
-  <meta name="description" content="Selected data engineering, MLOps, database, and machine-learning projects by Sam Malik — built on Python and SQL." />
+  <meta name="description" content="Selected projects by Sam Malik: an agentic MCP server, an MLOps pipeline, a shipped sold-comparables product, an analytics-engineering warehouse, a full ML lifecycle, and the resale data platform underneath. Built on Python, SQL, and TypeScript." />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
@@ -32,18 +32,24 @@
       <p class="eyebrow"><span class="idx">0.4</span> — BUILDING</p>
       <h1>Selected projects.</h1>
       <p class="lead" style="margin-top:24px">
-        Each of these started as a real question. Resale pricing, my own body's measurement noise, privacy,
-        a pandemic. The work was building the data infrastructure and analysis to actually answer it, end to end.
-        Almost all of them run on <span style="color:var(--phosphor)">Python and SQL</span>, from warehouses and
-        MLOps pipelines on one side to relational design and modeling on the other.
+        Each of these started as a real question. What a piece is actually worth, how an agent reasons about
+        a 3D model, whether my own body data survives its own measurement error. The work was building the
+        data infrastructure, the models, and the interfaces to answer it end to end. The six featured below
+        are the ones I would defend line by line. Most run on
+        <span style="color:var(--phosphor)">Python and SQL</span>, with
+        <span style="color:var(--phosphor)">TypeScript and MCP</span> where the work reached agents and the browser.
       </p>
       <div class="taglist" style="margin-top:28px">
         <span class="tag tag--phosphor">Python</span>
         <span class="tag tag--phosphor">SQL</span>
+        <span class="tag tag--phosphor">TypeScript</span>
+        <span class="tag">MCP</span>
         <span class="tag">dbt</span>
         <span class="tag">PySpark</span>
         <span class="tag">MLflow</span>
         <span class="tag">Airflow</span>
+        <span class="tag">Next.js</span>
+        <span class="tag">three.js</span>
         <span class="tag">BigQuery</span>
         <span class="tag">scikit-learn</span>
       </div>
@@ -51,68 +57,130 @@
 
     <section class="section wrap">
 
-      <!-- ============ 00 · SNEAKER RESALE INTELLIGENCE ============ -->
-      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
+      <!-- ============ 00 · MODELSENSE (new) ============ -->
+      <article id="p00" class="card card--accent" style="padding:40px; margin-bottom:40px">
         <span class="card__index">00</span>
         <div class="grid grid--2" style="align-items:start">
           <div>
-            <span class="tag tag--phosphor"><span class="dot"></span>Data Engineering · Live</span>
-            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Sneaker Resale Intelligence</h2>
-            <p class="sm-label" style="color:var(--phosphor)">RESALE WAREHOUSE · LIVE DASHBOARD</p>
-            <p style="margin-top:16px">An end-to-end data engineering project that turns real resale data into an analytical warehouse and a live dashboard. It answers the questions I actually find interesting about the resale market: which sneakers carry the highest premium over retail, how that premium decays after a release, and how it varies across sizes and silhouettes. The pipeline ingests about 100K real StockX resale sales, plus Google Trends as a live demand signal, through typed <strong style="color:var(--bone)">Python</strong> clients, lands them as raw JSON, and bulk-loads them into a hand-written <strong style="color:var(--bone)">PostgreSQL</strong> star schema through an idempotent loader.</p>
-            <p>From there, dbt transforms the raw tables across staging, intermediate, and mart layers, computing the premium economics with <strong style="color:var(--bone)">SQL</strong> window functions. A thin Streamlit dashboard reads the marts directly, so every figure on screen traces back to a tested, modeled table. It's built in public with a clean commit history and full-pipeline CI, with a deployed instance on Streamlit Community Cloud backed by Neon Postgres.</p>
+            <span class="tag tag--phosphor"><span class="dot"></span>Agentic AI · MCP · Live</span>
+            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">ModelSense</h2>
+            <p class="sm-label" style="color:var(--phosphor)">MCP SERVER · AGENT SDK · EVAL HARNESS</p>
+            <p style="margin-top:16px">ModelSense lets you talk to a 3D model. You load a glTF/GLB scene in the browser, ask a question in plain language ("what's the highest-poly part, and how big is it?"), and a Claude agent answers by calling tools on an <strong style="color:var(--bone)">MCP</strong> server that actually parses the geometry. The viewer then highlights the part, frames the camera, and draws the measurement in front of you. The point of the project isn't the chat. It's the machinery that makes an agent's tool use checkable: a stateless MCP server with a typed tool surface, human approval on the one tool that writes, per-turn <strong style="color:var(--bone)">Langfuse</strong> traces, and a Python eval harness that scores the agent against a golden set the server computes itself.</p>
+            <p>The server exposes nine tools over Streamable HTTP: eight read-only (list and load models, scene stats, find and highlight elements, focus the camera, measure, suggest optimizations) and one gated report export that only runs after an explicit approval. Every tool returns text plus typed <code>structuredContent</code>, so the <strong style="color:var(--bone)">React Three Fiber</strong> viewer applies scene commands directly instead of guessing. Loaded models live in a session-keyed in-memory cache, which keeps the server stateless per request and pushes the identity of a scene into a <code>session_id</code> that every later tool carries.</p>
 
-            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
+            <div class="grid grid--3" style="margin:24px 0">
+              <div class="datafield"><span class="df-label">MCP tools</span><span class="df-value">9<span class="unit"> · 8 read + 1 gated</span></span></div>
+              <div class="datafield"><span class="df-label">Golden evals</span><span class="df-value">50<span class="unit"> · 100% pass</span></span></div>
+              <div class="datafield"><span class="df-label">Context fidelity</span><span class="df-value">4.48<span class="unit"> / 5</span></span></div>
+            </div>
+
+            <p class="sm-label" style="margin-top:8px">Tools &amp; skills</p>
             <div class="taglist" style="margin-top:10px">
-              <span class="tag tag--phosphor">Python</span><span class="tag tag--phosphor">SQL</span><span class="tag">PostgreSQL</span><span class="tag">dbt</span><span class="tag">Streamlit</span><span class="tag">Star Schema</span><span class="tag">Window Functions</span><span class="tag">CI/CD</span>
+              <span class="tag tag--phosphor">Claude Agent SDK</span><span class="tag tag--phosphor">MCP</span><span class="tag">TypeScript</span><span class="tag">React Three Fiber</span><span class="tag">three.js</span><span class="tag">Langfuse</span><span class="tag">Zod</span><span class="tag">Python</span><span class="tag">Vitest</span><span class="tag">CI/CD</span>
             </div>
 
             <p class="sm-label" style="margin-top:24px">What I learned</p>
             <ul class="md" style="margin-top:10px">
-              <li>The decision I spent the most time on wasn't code, it was data sourcing. I started with live APIs (eBay, Reddit) and a tempting StockX scraper, then realized a fragile live feed is a bad foundation for something I want to demo reliably. Choosing a real public dataset as the backbone, and reframing the API clients as documented, tested, future-ready extensions, taught me that "real data" doesn't have to mean "live API."</li>
-              <li>The engineering lessons were all about getting the boring things right: putting idempotency in the schema (natural-key constraints plus <code>ON CONFLICT DO NOTHING</code>) rather than the loader, keeping one clear grain per fact table instead of unioning mismatched sources, and computing a metric like premium exactly once in an intermediate model so every downstream model agrees.</li>
-              <li>A sharp reminder that <code>execute_values</code> reports only its last page's row count, which sent me to <code>RETURNING</code> to report loads honestly.</li>
-              <li>Deploying against a managed Postgres surfaced the real-world details: SSL modes, pooled versus direct connections for DDL, and Google rate-limiting live Trends pulls.</li>
+              <li>The eval harness is the project, not the agent. A Python harness drives the real <code>/chat</code> endpoint through fifty golden tasks (lookup, multi-step, measurement, optimization, guardrail) and scores tool selection, argument validity, outcome, budget, and a guardrail safety invariant, with a Haiku judge for context fidelity. The golden answers are computed from the GLBs by the same server logic, not hand-typed, so the test can't quietly drift away from the geometry.</li>
+              <li>It caught a real bug. The baseline scored 94%, with the measurement category at 62% because the agent answered size questions from memory instead of calling <code>measure</code>. One system-prompt change that forces the tool took measurement to 100% and the suite to 100%. The number moved because the harness made the failure legible, which is the whole argument for building it.</li>
+              <li>Human-in-the-loop belongs at the agent layer, not inside the tool. The eight read tools are allowlisted and auto-approved; <code>export_report</code> is gated through <code>canUseTool</code>, which emits an approval event and blocks until the client posts back to <code>/chat/approve</code>. The invariant the harness enforces is that a gated tool can never succeed without that approval.</li>
+              <li>The free tier checks the design. The first deploy on Render's 512 MB instance ran five tasks and then 502'd from an out-of-memory on the combined agent process, which is exactly the kind of constraint that decides whether "stateless per request" was a real choice or a slogan.</li>
             </ul>
           </div>
           <div>
             <div class="exhibit" style="margin-bottom:16px">
-              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">LIVE DASHBOARD · PREMIUM TRAJECTORY</span></div>
-              <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/sneaker-dashboard.png" alt="Sneaker Resale Intelligence dashboard — Shoe Deep Dive showing the premium trajectory for the Adidas Yeezy Boost 350 V2 Zebra decaying from roughly 1.8x toward 0.5x over time" /></div>
-            </div>
-            <div class="exhibit">
-              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · PIPELINE ARCHITECTURE</span></div>
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · AGENT + MCP ARCHITECTURE</span></div>
               <div class="exhibit__plate exhibit__plate--dark" style="padding:20px">
                 <div class="stack">
-                  <div class="stack__layer"><span class="lt">Sources</span><span class="ld">StockX ~100K sales · Google Trends</span></div>
+                  <div class="stack__layer top"><span class="lt">Viewer + Chat</span><span class="ld">React Three Fiber · applies scene commands</span></div>
                   <div class="stack__arrow">↓</div>
-                  <div class="stack__layer"><span class="lt">Ingest</span><span class="ld">typed Python clients → raw JSON</span></div>
+                  <div class="stack__layer"><span class="lt">Agent loop</span><span class="ld">Claude Agent SDK · SSE /chat · HITL approval</span></div>
                   <div class="stack__arrow">↓</div>
-                  <div class="stack__layer"><span class="lt">Load</span><span class="ld">idempotent loader → Postgres star schema</span></div>
+                  <div class="stack__layer"><span class="lt">MCP server</span><span class="ld">stateless Streamable HTTP · 9 typed tools</span></div>
                   <div class="stack__arrow">↓</div>
-                  <div class="stack__layer"><span class="lt">Transform</span><span class="ld">dbt · staging → intermediate → marts</span></div>
+                  <div class="stack__layer"><span class="lt">glTF domain</span><span class="ld">gltf-transform · session-id LRU cache</span></div>
                   <div class="stack__arrow">↓</div>
-                  <div class="stack__layer top"><span class="lt">Serve</span><span class="ld">Streamlit dashboard · reads marts</span></div>
+                  <div class="stack__layer"><span class="lt">Model source</span><span class="ld">Khronos GLB · allowlisted sample URLs</span></div>
                 </div>
+                <p class="sm-label" style="margin-top:14px; color:var(--ash-dim)">↳ side channel · Langfuse trace per turn · 50-task eval gates CI</p>
               </div>
             </div>
+            <div class="exhibit" style="margin-bottom:16px">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">EVAL HARNESS · BASELINE → AFTER ONE PROMPT FIX</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:16px">
+                <table style="width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:var(--t-xs)">
+                  <thead>
+                    <tr style="color:var(--ash); letter-spacing:.04em">
+                      <th style="padding:6px 6px; border-bottom:1px solid var(--hairline); font-weight:500; text-align:left">category</th>
+                      <th style="padding:6px 6px; border-bottom:1px solid var(--hairline); font-weight:500; text-align:right">tasks</th>
+                      <th style="padding:6px 6px; border-bottom:1px solid var(--hairline); font-weight:500; text-align:right">baseline</th>
+                      <th style="padding:6px 6px; border-bottom:1px solid var(--hairline); font-weight:500; text-align:right">now</th>
+                    </tr>
+                  </thead>
+                  <tbody style="color:var(--bone-dim)">
+                    <tr>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:left">lookup</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">12</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">100%</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">100%</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:left">multi-step</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">14</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">100%</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">100%</td>
+                    </tr>
+                    <tr style="color:var(--phosphor)">
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:left">measurement</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">8</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">62%</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">100%</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:left">optimization</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">10</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">100%</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">100%</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:left">guardrail</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">6</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">100%</td>
+                      <td style="padding:6px 6px; border-bottom:1px solid var(--hairline); text-align:right">100%</td>
+                    </tr>
+                    <tr style="color:var(--bone)">
+                      <td style="padding:6px 6px; text-align:left">all tasks</td>
+                      <td style="padding:6px 6px; text-align:right">50</td>
+                      <td style="padding:6px 6px; text-align:right">94%</td>
+                      <td style="padding:6px 6px; text-align:right; color:var(--phosphor)">100%</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p class="sm-label" style="margin-top:12px; color:var(--ash-dim)">agent · claude-sonnet-5 &nbsp;·&nbsp; context-fidelity judge · claude-haiku-4-5</p>
+              </div>
+            </div>
+            <div class="exhibit" style="margin-bottom:16px">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">LANGFUSE · ONE TURN · 3 TOOL SPANS + COST</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/modelsense-langfuse.png" alt="Langfuse trace of one ModelSense turn: the agent answers 'find every node with wheel in the name and highlight the largest one' with three tool spans (load_model, find_elements, highlight_elements) over 4 turns in 28.2s, 3,394 input and 493 output tokens, $0.15, traced through the langfuse-sdk over OpenTelemetry" /></div>
+            </div>
+            <!-- TODO(Sam): add a static ModelSense viewer screenshot (a loaded model with an element highlighted + a measurement drawn). Save as assets/img/modelsense-viewer.png and I'll wire it as the hero exhibit here. -->
             <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap">
-              <a class="btn btn--primary" href="https://sneaker-intel-2.streamlit.app/" target="_blank" rel="noopener">Open live dashboard <span>→</span></a>
-              <a class="btn btn--ghost" href="https://github.com/smalik-25/sneaker-intel" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
+              <a class="btn btn--primary" href="https://model-sense-web.vercel.app/" target="_blank" rel="noopener">Open live demo <span>→</span></a>
+              <a class="btn btn--ghost" href="https://github.com/smalik-25/ModelSense" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
             </div>
           </div>
         </div>
       </article>
 
       <!-- ============ 01 · SNEAKER PRICE MLOPS PIPELINE (Phase 2) ============ -->
-      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
+      <article id="p01" class="card card--accent" style="padding:40px; margin-bottom:40px">
         <span class="card__index">01</span>
         <div class="grid grid--2" style="align-items:start">
           <div>
             <span class="tag tag--phosphor"><span class="dot"></span>MLOps · Machine Learning</span>
             <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Sneaker Price MLOps Pipeline</h2>
             <p class="sm-label" style="color:var(--phosphor)">SNEAKER-INTEL · PHASE 2</p>
-            <p style="margin-top:16px">The deliberate Phase 2 of Sneaker Resale Intelligence. That project built the data-engineering foundation, a hand-written Postgres star schema over ~99K StockX sales with a full dbt layer. This one builds the ML layer on top of it: an end-to-end MLOps pipeline that predicts a sneaker's resale price premium. The model itself is a plain feedforward net on purpose. The whole point is everything around it, the parts that have to hold up to a "why did you build it that way" question, in reliability, reproducibility, and scale.</p>
+            <p style="margin-top:16px">The deliberate Phase 2 of <a href="#p05" style="color:var(--phosphor); border-bottom:1px solid var(--phosphor-dim)">Sneaker Resale Intelligence</a>. That project built the data-engineering foundation, a hand-written Postgres star schema over ~99K StockX sales with a full dbt layer. This one builds the ML layer on top of it: an end-to-end MLOps pipeline that predicts a sneaker's resale price premium. The model itself is a plain feedforward net on purpose. The whole point is everything around it, the parts that have to hold up to a "why did you build it that way" question, in reliability, reproducibility, and scale.</p>
             <p>The topology is a chain of stages that talk to each other only through typed Parquet at an S3 path. An ingest stage acts as an anti-corruption layer over the sneaker-intel Postgres star schema (or synthetic fixtures in dev and CI) and lands a raw zone partitioned by <code>run_date</code>. <strong style="color:var(--bone)">PySpark</strong> builds the feature set partitioned by brand; <strong style="color:var(--bone)">Pandera</strong> validates it as a data contract and writes a validation report; <strong style="color:var(--bone)">Ray Train + PyTorch</strong> trains the regression net to <code>model.pt</code> while logging to <strong style="color:var(--bone)">MLflow</strong> tracking; and a register stage promotes the run into the MLflow registry as <code>sneaker-price-model @staging</code>. An <strong style="color:var(--bone)">Airflow</strong> DAG threads the whole thing with XCom paths, owning the topology but none of the logic, and one fsspec I/O layer means the same code runs against S3 in prod and local disk in CI.</p>
 
             <div class="grid grid--3" style="margin:24px 0">
@@ -152,9 +220,139 @@
         </div>
       </article>
 
-      <!-- ============ 02 · VOICE ASSISTANT SENTIMENT (revamped) ============ -->
-      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
+      <!-- ============ 02 · RELIQUERY (new) ============ -->
+      <article id="p02" class="card card--accent" style="padding:40px; margin-bottom:40px">
         <span class="card__index">02</span>
+        <div class="grid grid--2" style="align-items:start">
+          <div>
+            <span class="tag tag--phosphor"><span class="dot"></span>Data Product · Full-Stack · Live</span>
+            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">ReliQuery</h2>
+            <p class="sm-label" style="color:var(--phosphor)">SOLD COMPARABLES · ARCHIVE MENSWEAR</p>
+            <p style="margin-top:16px">ReliQuery answers one question about archive and avant-garde menswear: what a piece is actually worth, not what it's listed at. The hard part isn't scraping. It's that the same Rick Owens piece sells on <strong style="color:var(--bone)">Grailed</strong> and <strong style="color:var(--bone)">eBay</strong> under different titles, in different languages, with no shared key, so before you can quote a comparable you have to prove two listings are the same physical piece. ReliQuery is the resolution layer that does that, then turns sparse, noisy sold records into a price you can defend down to the sales behind it.</p>
+            <p>Apify actors pull sold listings from Grailed and eBay on a scheduled GitHub Actions job, never on the web server. Every source enters through a typed anti-corruption adapter that normalizes currency and shape into one canonical row, so a renamed or broken scraper is a one-file change and no source-specific quirk leaks past the boundary. Those rows land in <strong style="color:var(--bone)">Neon Postgres</strong> as a star schema; a staged <strong style="color:var(--bone)">rapidfuzz</strong> resolver reads brand first, then archetype, model, and season, and only forms a piece when it has the brand plus at least an archetype or model. <strong style="color:var(--bone)">dbt</strong> builds the comparables, velocity, and spread marts, and a thin <strong style="color:var(--bone)">Next.js</strong> frontend on Vercel reads the marts with no business logic of its own.</p>
+
+            <div class="grid grid--3" style="margin:24px 0">
+              <div class="datafield"><span class="df-label">Sold comps</span><span class="df-value">4,280</span></div>
+              <div class="datafield"><span class="df-label">Resolved pieces</span><span class="df-value">531</span></div>
+              <div class="datafield"><span class="df-label">Rows resolved</span><span class="df-value">~86<span class="unit">%</span></span></div>
+            </div>
+
+            <p class="sm-label" style="margin-top:8px">Tools &amp; skills</p>
+            <div class="taglist" style="margin-top:10px">
+              <span class="tag tag--phosphor">TypeScript</span><span class="tag tag--phosphor">Python</span><span class="tag">Next.js</span><span class="tag">Apify</span><span class="tag">Neon Postgres</span><span class="tag">dbt</span><span class="tag">rapidfuzz</span><span class="tag">pgvector</span><span class="tag">OpenCLIP</span><span class="tag">Vercel</span>
+            </div>
+
+            <p class="sm-label" style="margin-top:24px">What I learned</p>
+            <ul class="md" style="margin-top:10px">
+              <li>Entity resolution is the entire product. Scraping is a solved, boring problem; deciding that two listings in two languages are the same jacket is the thing worth building. The resolver assigns a canonical piece to about 86% of rows, which is what turns a pile of listings into comparables you can price against.</li>
+              <li>The anti-corruption adapter earned its keep. One typed boundary per source means the messy reality of each marketplace stops at the adapter, and the canonical row the rest of the system sees never learns that eBay and Grailed disagree about everything. When an actor changed shape, the fix was one file.</li>
+              <li>A code review made me delete a headline number. An early version reported 172 cross-marketplace spreads; the review pushed on how many were real matches versus fuzzy collisions, and the honest count that clears the bar is closer to 15. Reporting the small true number instead of the big shaky one was the right call.</li>
+              <li>The price model doesn't beat the median, and the case study says so. A LightGBM regressor over the comparables lands within about 1% of just taking the brand-and-archetype median (MAE around $240), so I report it as evaluated, not as a win. The defensible answer here is a well-resolved comparable, not a model pretending to know more than the data does.</li>
+              <li>There's a second way in: image search. A Modal-hosted OpenCLIP worker embeds a photo and finds the nearest pieces through a pgvector index, which reaches 95% brand and 86% exact-piece accuracy leave-one-out on the reference set. Same resolution problem, approached from pixels instead of text.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="exhibit" style="margin-bottom:16px">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · SOLD-COMPARABLES PIPELINE</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:20px">
+                <div class="stack">
+                  <div class="stack__layer"><span class="lt">Sources</span><span class="ld">Apify actors · Grailed + eBay · GH Actions cron</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">Adapters</span><span class="ld">typed anti-corruption · one per source → canonical row</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">Store</span><span class="ld">Neon Postgres · canonical star schema</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">Resolve</span><span class="ld">staged rapidfuzz · brand → archetype → model → season</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">Transform</span><span class="ld">dbt · comps · velocity · spread marts</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer top"><span class="lt">Serve</span><span class="ld">Next.js on Vercel · thin read layer</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="exhibit" style="margin-top:16px; margin-bottom:16px">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">LIVE · RESOLVED PIECE · PRICED OFF ITS OWN COMPS</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/reliquery-piece.png" alt="ReliQuery piece view for the Rick Owens Ramones: 51 sold comps across eBay and Grailed resolve to a recommended list price of $375, graded A, with a P10-to-P90 price band from $265 to $665 around the $375 median" /></div>
+            </div>
+            <div class="exhibit" style="margin-bottom:16px">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">LIVE · CROSS-MARKETPLACE SPREAD · SAME PIECE, TWO MARKETS</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/reliquery-spread.png" alt="ReliQuery cross-marketplace spread for the same Rick Owens Ramones: Grailed median $370 over 43 comps versus eBay median $448 over 8 comps, a 17 percent gap, plus a markdown readout of 7 percent median and 25 percent P90 across 43 Grailed listings" /></div>
+            </div>
+            <p class="sm-label" style="color:var(--ash); line-height:1.7">Repo is named <span style="color:var(--bone-dim)">TrueComp</span>: ReliQuery is the site, TrueComp is the pipeline underneath it.</p>
+            <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap">
+              <a class="btn btn--primary" href="https://reliquery.vercel.app/" target="_blank" rel="noopener">Open live product <span>→</span></a>
+              <a class="btn btn--ghost" href="https://github.com/smalik-25/TrueComp" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ 03 · DATA-DRIVEN FITNESS ============ -->
+      <article id="p03" class="card card--accent" style="padding:40px; margin-bottom:40px">
+        <span class="card__index">03</span>
+        <div class="grid grid--2" style="align-items:start">
+          <div>
+            <span class="tag tag--phosphor"><span class="dot"></span>Analytics Engineering · Live</span>
+            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Data-Driven Fitness</h2>
+            <p class="sm-label" style="color:var(--phosphor)">BODY DATA × POPULATION BASELINES</p>
+            <p style="margin-top:16px">An end-to-end data engineering and analytics project that links my own body data (two DEXA scans, Apple Health, calorie and protein logs, tracked lifts) to population baselines from NHANES and ACSM, to answer five concrete physiology questions. The hook: my two DEXA scans sit a month apart and report a −9.8 lb fat, +8.4 lb lean change, which is biologically implausible over 30 days. So instead of plotting the numbers and calling it a body recomposition, the project quantifies the measurement uncertainty, shows where the real change sits inside the instrument's noise floor, and reconciles what's left against energy balance and population data.</p>
+            <p>Under the hood it's a proper warehouse. <strong style="color:var(--bone)">Python</strong> and Polars stream-parse the 328 MB Apple Health XML and the NHANES files into bronze Parquet; <strong style="color:var(--bone)">dbt</strong> builds silver and gold marts across two targets (DuckDB for private local dev, BigQuery for the de-identified public layer) with tests and contracts; Airflow orchestrates ingest → build → test → analyze → dashboard; and an Evidence.dev site serves it publicly. Raw health data never leaves the machine, so only de-identified aggregates reach the cloud and the repo.</p>
+
+            <div class="grid grid--3" style="margin:24px 0">
+              <div class="datafield"><span class="df-label">Apple Health XML</span><span class="df-value">328<span class="unit"> MB</span></span></div>
+              <div class="datafield"><span class="df-label">DEXA fat / lean Δ</span><span class="df-value">−9.8 / +8.4<span class="unit"> lb</span></span></div>
+              <div class="datafield"><span class="df-label">Real muscle</span><span class="df-value">≤ 4.3 lb<span class="unit"> of the +8.4</span></span></div>
+            </div>
+
+            <p class="sm-label" style="margin-top:8px">Tools &amp; skills</p>
+            <div class="taglist" style="margin-top:10px">
+              <span class="tag tag--phosphor">Python</span><span class="tag tag--phosphor">SQL</span><span class="tag">Polars</span><span class="tag">dbt</span><span class="tag">DuckDB</span><span class="tag">BigQuery</span><span class="tag">Airflow</span><span class="tag">Evidence.dev</span><span class="tag">CI/CD</span>
+            </div>
+
+            <p class="sm-label" style="margin-top:24px">What I learned</p>
+            <ul class="md" style="margin-top:10px">
+              <li>The headline finding is a measurement-uncertainty result: the +8.4 lb "lean gain" is mostly glycogen and hydration water (about 4.1 lb), not muscle. At most ~4.3 lb is plausible newbie muscle in a month. Honest analysis meant decomposing the number before celebrating it.</li>
+              <li>A contract on <code>fct_daily</code> with a guaranteed grain and fixed types let the marts and the analysis trust their inputs, which is what makes the uncertainty math defensible.</li>
+              <li>The DuckDB-dev / BigQuery-prod split was a privacy and dev/prod-parity choice, not a scale one. It keeps raw data on my machine and exposes only aggregates to the cloud and the public site.</li>
+              <li>Airflow is overkill for a single-machine pipeline. I used it for the recognizable, production-shaped orchestration and the discipline it forces.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="exhibit" style="margin-bottom:16px">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">LIVE DASHBOARD · DEXA, DECOMPOSED</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/fitness-dashboard.png" alt="Data Driven Fitness dashboard — the DEXA lean and fat change decomposed against measurement uncertainty and population baselines" /></div>
+            </div>
+            <!-- TODO(Sam): add dbt DAG screenshot from `dbt docs generate` (staging → silver → gold). Generate locally since raw data never leaves the machine. -->
+            <div class="exhibit">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · PIPELINE ARCHITECTURE</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:20px">
+                <div class="stack">
+                  <div class="stack__layer"><span class="lt">Sources</span><span class="ld">Apple Health XML · DEXA · LoseIt · Strong · NHANES</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">Ingest</span><span class="ld">Python + Polars → bronze Parquet</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">Warehouse</span><span class="ld">dbt · DuckDB dev → silver / gold marts</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer"><span class="lt">Promote</span><span class="ld">de-identified marts → BigQuery prod</span></div>
+                  <div class="stack__arrow">↓</div>
+                  <div class="stack__layer top"><span class="lt">Serve</span><span class="ld">Evidence.dev dashboard · Airflow-orchestrated</span></div>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap">
+              <a class="btn btn--primary" href="https://data-driven-fitness.netlify.app/" target="_blank" rel="noopener">Open live dashboard <span>→</span></a>
+              <a class="btn btn--ghost" href="https://github.com/smalik-25/data-driven-fitness" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ============ 04 · VOICE ASSISTANT SENTIMENT (revamped) ============ -->
+      <!-- PHASE 3 EMBED (decided): plain iframe of https://smalik25-voice-assistant-review-sentiment-classifier.hf.space
+           The Space serves an HTML demo UI at GET / whose form posts same-origin to /predict, so no CORS work is needed.
+           Add the lazy-loaded iframe + cold-start skeleton in Phase 3. Button below already points at the right URL. -->
+      <article id="p04" class="card card--accent" style="padding:40px; margin-bottom:40px">
+        <span class="card__index">04</span>
         <div class="grid grid--2" style="align-items:start">
           <div>
             <span class="tag tag--phosphor"><span class="dot"></span>ML Lifecycle · Live</span>
@@ -240,6 +438,7 @@
                 </div>
               </div>
             </div>
+            <!-- TODO(Phase 3): replace/augment the button below with a lazy-loaded iframe of the hf.space demo + cold-start skeleton ("spinning up, first load 30-60s") + this new-tab fallback link. -->
             <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap">
               <a class="btn btn--primary" href="https://smalik25-voice-assistant-review-sentiment-classifier.hf.space" target="_blank" rel="noopener">Try the live demo <span>→</span></a>
               <a class="btn btn--ghost" href="https://github.com/smalik-25/Voice-Assistant-Review-Sentiment-Classifier" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
@@ -248,386 +447,154 @@
         </div>
       </article>
 
-      <!-- ============ 03 · DATA-DRIVEN FITNESS ============ -->
-      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">03</span>
+      <!-- ============ 05 · SNEAKER RESALE INTELLIGENCE (Phase 1) ============ -->
+      <article id="p05" class="card card--accent" style="padding:40px; margin-bottom:40px">
+        <span class="card__index">05</span>
         <div class="grid grid--2" style="align-items:start">
           <div>
             <span class="tag tag--phosphor"><span class="dot"></span>Data Engineering · Live</span>
-            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Data-Driven Fitness</h2>
-            <p class="sm-label" style="color:var(--phosphor)">BODY DATA × POPULATION BASELINES</p>
-            <p style="margin-top:16px">An end-to-end data engineering and analytics project that links my own body data (two DEXA scans, Apple Health, calorie and protein logs, tracked lifts) to population baselines from NHANES and ACSM, to answer five concrete physiology questions. The hook: my two DEXA scans sit a month apart and report a −9.8 lb fat, +8.4 lb lean change, which is biologically implausible over 30 days. So instead of plotting the numbers and calling it a body recomposition, the project quantifies the measurement uncertainty, shows where the real change sits inside the instrument's noise floor, and reconciles what's left against energy balance and population data.</p>
-            <p>Under the hood it's a proper warehouse. <strong style="color:var(--bone)">Python</strong> and Polars stream-parse the 328 MB Apple Health XML and the NHANES files into bronze Parquet; <strong style="color:var(--bone)">dbt</strong> builds silver and gold marts across two targets (DuckDB for private local dev, BigQuery for the de-identified public layer) with tests and contracts; Airflow orchestrates ingest → build → test → analyze → dashboard; and an Evidence.dev site serves it publicly. Raw health data never leaves the machine, so only de-identified aggregates reach the cloud and the repo.</p>
+            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Sneaker Resale Intelligence</h2>
+            <p class="sm-label" style="color:var(--phosphor)">RESALE WAREHOUSE · LIVE DASHBOARD</p>
+            <p style="margin-top:16px">An end-to-end data engineering project that turns real resale data into an analytical warehouse and a live dashboard. It answers the questions I actually find interesting about the resale market: which sneakers carry the highest premium over retail, how that premium decays after a release, and how it varies across sizes and silhouettes. The pipeline ingests about 100K real StockX resale sales, plus Google Trends as a live demand signal, through typed <strong style="color:var(--bone)">Python</strong> clients, lands them as raw JSON, and bulk-loads them into a hand-written <strong style="color:var(--bone)">PostgreSQL</strong> star schema through an idempotent loader.</p>
+            <p>From there, dbt transforms the raw tables across staging, intermediate, and mart layers, computing the premium economics with <strong style="color:var(--bone)">SQL</strong> window functions. A thin Streamlit dashboard reads the marts directly, so every figure on screen traces back to a tested, modeled table. It's built in public with a clean commit history and full-pipeline CI, with a deployed instance on Streamlit Community Cloud backed by Neon Postgres. The ML layer on top of this warehouse is <a href="#p01" style="color:var(--phosphor); border-bottom:1px solid var(--phosphor-dim)">Phase 2, the Sneaker Price MLOps Pipeline</a>.</p>
 
-            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
+            <div class="grid grid--3" style="margin:24px 0">
+              <div class="datafield"><span class="df-label">Real StockX sales</span><span class="df-value">99,956</span></div>
+              <div class="datafield"><span class="df-label">Peak premium</span><span class="df-value">21.3×<span class="unit"> over retail</span></span></div>
+              <div class="datafield"><span class="df-label">dbt models</span><span class="df-value">9<span class="unit"> · 3 layers</span></span></div>
+            </div>
+
+            <p class="sm-label" style="margin-top:8px">Tools &amp; skills</p>
             <div class="taglist" style="margin-top:10px">
-              <span class="tag tag--phosphor">Python</span><span class="tag tag--phosphor">SQL</span><span class="tag">Polars</span><span class="tag">dbt</span><span class="tag">DuckDB</span><span class="tag">BigQuery</span><span class="tag">Airflow</span><span class="tag">Evidence.dev</span><span class="tag">CI/CD</span>
+              <span class="tag tag--phosphor">Python</span><span class="tag tag--phosphor">SQL</span><span class="tag">PostgreSQL</span><span class="tag">dbt</span><span class="tag">Streamlit</span><span class="tag">Star Schema</span><span class="tag">Window Functions</span><span class="tag">CI/CD</span>
             </div>
 
             <p class="sm-label" style="margin-top:24px">What I learned</p>
             <ul class="md" style="margin-top:10px">
-              <li>The headline finding is a measurement-uncertainty result: the +8.4 lb "lean gain" is mostly glycogen and hydration water (about 4.1 lb), not muscle. At most ~4.3 lb is plausible newbie muscle in a month. Honest analysis meant decomposing the number before celebrating it.</li>
-              <li>A contract on <code>fct_daily</code> with a guaranteed grain and fixed types let the marts and the analysis trust their inputs, which is what makes the uncertainty math defensible.</li>
-              <li>The DuckDB-dev / BigQuery-prod split was a privacy and dev/prod-parity choice, not a scale one. It keeps raw data on my machine and exposes only aggregates to the cloud and the public site.</li>
-              <li>Airflow is overkill for a single-machine pipeline. I used it for the recognizable, production-shaped orchestration and the discipline it forces.</li>
+              <li>The decision I spent the most time on wasn't code, it was data sourcing. I started with live APIs (eBay, Reddit) and a tempting StockX scraper, then realized a fragile live feed is a bad foundation for something I want to demo reliably. Choosing a real public dataset as the backbone, and reframing the API clients as documented, tested, future-ready extensions, taught me that "real data" doesn't have to mean "live API."</li>
+              <li>The engineering lessons were all about getting the boring things right: putting idempotency in the schema (natural-key constraints plus <code>ON CONFLICT DO NOTHING</code>) rather than the loader, keeping one clear grain per fact table instead of unioning mismatched sources, and computing a metric like premium exactly once in an intermediate model so every downstream model agrees.</li>
+              <li>A sharp reminder that <code>execute_values</code> reports only its last page's row count, which sent me to <code>RETURNING</code> to report loads honestly.</li>
+              <li>Deploying against a managed Postgres surfaced the real-world details: SSL modes, pooled versus direct connections for DDL, and Google rate-limiting live Trends pulls.</li>
             </ul>
           </div>
           <div>
             <div class="exhibit" style="margin-bottom:16px">
-              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">LIVE DASHBOARD · DEXA, DECOMPOSED</span></div>
-              <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/fitness-dashboard.png" alt="Data Driven Fitness dashboard — the DEXA lean and fat change decomposed against measurement uncertainty and population baselines" /></div>
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">LIVE DASHBOARD · PREMIUM TRAJECTORY</span></div>
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/sneaker-dashboard.png" alt="Sneaker Resale Intelligence dashboard — Shoe Deep Dive showing the premium trajectory for the Adidas Yeezy Boost 350 V2 Zebra decaying from roughly 1.8x toward 0.5x over time" /></div>
             </div>
             <div class="exhibit">
               <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · PIPELINE ARCHITECTURE</span></div>
               <div class="exhibit__plate exhibit__plate--dark" style="padding:20px">
                 <div class="stack">
-                  <div class="stack__layer"><span class="lt">Sources</span><span class="ld">Apple Health XML · DEXA · LoseIt · Strong · NHANES</span></div>
+                  <div class="stack__layer"><span class="lt">Sources</span><span class="ld">StockX ~100K sales · Google Trends</span></div>
                   <div class="stack__arrow">↓</div>
-                  <div class="stack__layer"><span class="lt">Ingest</span><span class="ld">Python + Polars → bronze Parquet</span></div>
+                  <div class="stack__layer"><span class="lt">Ingest</span><span class="ld">typed Python clients → raw JSON</span></div>
                   <div class="stack__arrow">↓</div>
-                  <div class="stack__layer"><span class="lt">Warehouse</span><span class="ld">dbt · DuckDB dev → silver / gold marts</span></div>
+                  <div class="stack__layer"><span class="lt">Load</span><span class="ld">idempotent loader → Postgres star schema</span></div>
                   <div class="stack__arrow">↓</div>
-                  <div class="stack__layer"><span class="lt">Promote</span><span class="ld">de-identified marts → BigQuery prod</span></div>
+                  <div class="stack__layer"><span class="lt">Transform</span><span class="ld">dbt · staging → intermediate → marts</span></div>
                   <div class="stack__arrow">↓</div>
-                  <div class="stack__layer top"><span class="lt">Serve</span><span class="ld">Evidence.dev dashboard · Airflow-orchestrated</span></div>
+                  <div class="stack__layer top"><span class="lt">Serve</span><span class="ld">Streamlit dashboard · reads marts</span></div>
                 </div>
               </div>
             </div>
+            <!-- TODO(Phase 3): embed <iframe src="https://sneaker-intel-2.streamlit.app/?embed=true"> below the case study, lazy-loaded, with cold-start copy + new-tab fallback (Streamlit sleeps after 12h). -->
             <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap">
-              <a class="btn btn--primary" href="https://data-driven-fitness.netlify.app/" target="_blank" rel="noopener">Open live dashboard <span>→</span></a>
-              <a class="btn btn--ghost" href="https://github.com/smalik-25/data-driven-fitness" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
+              <a class="btn btn--primary" href="https://sneaker-intel-2.streamlit.app/" target="_blank" rel="noopener">Open live dashboard <span>→</span></a>
+              <a class="btn btn--ghost" href="https://github.com/smalik-25/sneaker-intel" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
             </div>
           </div>
         </div>
       </article>
 
-      <!-- ============ 04 · DIGITAL I-D ============ -->
-      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">04</span>
-        <div class="grid grid--2" style="align-items:start">
-          <div>
-            <span class="tag tag--phosphor"><span class="dot"></span>Data Science · Web</span>
-            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Digital i-D</h2>
-            <p class="sm-label" style="color:var(--phosphor)">INTERACTIVE PRIVACY EXPERIENCE</p>
-            <p style="margin-top:16px">An interactive educational web app (built as "Data Mirror") that teaches how online data collection actually works through experience rather than explanation. You browse a simulated site while it quietly tracks your behavior (scrolling, hovering, time spent), then it replays exactly what was captured and what can be inferred from it. The goal is to close the gap between knowing that data collection happens and feeling how everyday clicks become tracking, profiling, and personalization.</p>
-            <p>I worked the data-science side: turning raw interaction events into the behavioral signals and inferences the app surfaces, and shaping what the reflection screen reveals, which actions imply which profile attributes. The live build runs as a static front end on Firebase Hosting.</p>
+      <!-- ============ ARCHIVE ============ -->
+      <div class="rule rule--accent"><span class="rule__label"><span class="idx">§</span> &nbsp; ARCHIVE · MORE BUILDS</span></div>
 
-            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
-            <div class="taglist" style="margin-top:10px">
-              <span class="tag tag--phosphor">Behavioral Data</span><span class="tag tag--phosphor">Inference</span><span class="tag">JavaScript</span><span class="tag">Firebase</span><span class="tag">Data Viz</span><span class="tag tag--oxblood">Privacy</span>
-            </div>
+      <div class="arch-list">
 
-            <p class="sm-label" style="margin-top:24px">What I learned</p>
-            <ul class="md" style="margin-top:10px">
-              <li>Experience beats explanation. Replaying someone's own scroll and hover history lands the privacy point harder than any infographic.</li>
-              <li>An inference is only as honest as the rule behind it, so the hard part was not overclaiming what the behavior data actually supports.</li>
-              <li>The gap between privacy concern and privacy action is the real target, and it's a design and data problem before it's a policy one.</li>
-            </ul>
+        <div class="arch-row">
+          <div class="arch-row__main">
+            <h3 class="arch-row__title">Digital i-D</h3>
+            <p class="arch-row__desc">An interactive educational web app that teaches how online data collection actually works through experience rather than explanation. I worked the data-science side: turning raw interaction events into the behavioral signals and inferences the app surfaces.</p>
+            <div class="arch-row__tags"><span class="tag">Behavioral Data</span><span class="tag">JavaScript</span><span class="tag">Firebase</span><span class="tag tag--oxblood">Privacy</span></div>
           </div>
-          <div>
-            <div class="exhibit">
-              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">LIVE · DIGITAL-ID-F1AFF.WEB.APP</span></div>
-              <div class="exhibit__plate exhibit__plate--dark" style="padding:18px">
-                <div style="font-family:var(--font-mono)">
-                  <div style="display:flex; align-items:baseline; gap:8px">
-                    <span style="color:var(--bone); font-weight:600; letter-spacing:.04em">DI-<span style="color:var(--phosphor)">D</span></span>
-                    <span style="color:var(--ash-dim); font-size:10px; letter-spacing:.18em">· DIGITAL IDENTITY</span>
-                  </div>
-                  <div style="font-size:9.5px; letter-spacing:.14em; margin-top:6px"><span style="color:var(--oxblood-lift)">●</span> <span style="color:var(--ash)">SYSTEM INITIALISED · </span><span style="color:var(--phosphor)">TRACKING ACTIVE</span></div>
-                  <div class="display" style="font-family:var(--font-ui); font-weight:700; line-height:1.0; margin:14px 0 16px; font-size:1.6rem">
-                    <span style="color:var(--bone)">Trace Your</span><br><span style="color:var(--phosphor)">Digital Footprint</span>
-                  </div>
-                  <div style="border:1px solid var(--hairline); border-radius:4px; overflow:hidden">
-                    <div style="display:flex; align-items:center; justify-content:space-between; padding:6px 10px; border-bottom:1px solid var(--hairline)">
-                      <span><span style="color:var(--oxblood-lift)">●</span> <span style="color:var(--signal-warn)">●</span> <span style="color:var(--phosphor)">●</span> &nbsp;<span style="color:var(--ash); font-size:10px">SESSION_REPLAY.log</span></span>
-                      <span style="color:var(--ash-dim); font-size:9px">8 events</span>
-                    </div>
-                    <div style="padding:8px 10px; font-size:9.5px; line-height:1.85; color:var(--bone-dim)">
-                      <div><span style="color:var(--ash-dim)">00:00:25</span> <span style="color:var(--phosphor)">(INIT)</span> &nbsp;Session replay initialized…</div>
-                      <div><span style="color:var(--ash-dim)">00:00:28</span> <span style="color:var(--phosphor)">(MOUSE)</span> &nbsp;cursor at (1398, 103)</div>
-                      <div><span style="color:var(--ash-dim)">00:00:48</span> <span style="color:var(--phosphor)">(LOAD)</span> &nbsp;Page fully loaded</div>
-                      <div><span style="color:var(--ash-dim)">00:00:90</span> <span style="color:var(--phosphor)">(TRACK)</span> &nbsp;Mouse tracking enabled</div>
-                      <div><span style="color:var(--ash-dim)">00:02:80</span> <span style="color:var(--signal-warn)">(SCROLL)</span> &nbsp;scroll offset 4px</div>
-                      <div><span style="color:var(--ash-dim)">00:04:00</span> <span style="color:var(--signal-warn)">(SCROLL)</span> &nbsp;scroll offset 850px</div>
-                      <div><span style="color:var(--ash-dim)">00:05:23</span> <span style="color:var(--signal-warn)">(SCROLL)</span> &nbsp;scroll offset 1124px</div>
-                      <div><span style="color:var(--ash-dim)">00:06:39</span> <span style="color:var(--phosphor)">(MOUSE)</span> &nbsp;cursor at (689, 132)</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap">
-              <a class="btn btn--primary" href="https://digital-id-f1aff.web.app/" target="_blank" rel="noopener">Open live app <span>→</span></a>
-              <a class="btn btn--ghost" href="https://github.com/chuntr/datamirror" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
-            </div>
+          <div class="arch-row__links">
+            <a href="https://digital-id-f1aff.web.app/" target="_blank" rel="noopener">Live →</a>
+            <a href="https://github.com/chuntr/datamirror" target="_blank" rel="noopener">GitHub →</a>
           </div>
         </div>
-      </article>
 
-      <!-- ============ 05 · GRAILED ============ -->
-      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">05</span>
-        <div class="grid grid--2" style="align-items:start">
-          <div>
-            <div class="exhibit">
-              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · BOTTOMS RESALE MARKET DASHBOARD</span></div>
-              <div class="exhibit__plate"><img src="assets/img/grailed-dashboard-full.png" alt="Grailed Bottoms Resale Market Dashboard — five views: average price by brand and condition, high-price listings by brand, average price by size, median price with vs without price drops, and the distribution of resale prices" /></div>
-            </div>
-            <a class="btn btn--primary" style="margin-top:16px" href="https://public.tableau.com/shared/F6N6XKSZT?:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener">Open live dashboard <span>→</span></a>
+        <div class="arch-row">
+          <div class="arch-row__main">
+            <h3 class="arch-row__title">Grailed Luxury Market Analysis</h3>
+            <p class="arch-row__desc">A data story on the Grailed resale market, built from thousands of menswear listings. Python and Tableau Prep shaped the scrape; SQL aggregations cross-checked how brand prestige, condition, and origin drive resale value in a heavily right-skewed market.</p>
+            <div class="arch-row__tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Tableau</span><span class="tag">Feature Engineering</span></div>
           </div>
-          <div>
-            <span class="tag tag--phosphor"><span class="dot"></span>Analytics · Viz</span>
-            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Grailed Luxury Market Analysis</h2>
-            <p class="sm-label" style="color:var(--phosphor)">RESALE MARKET DASHBOARD</p>
-            <p style="margin-top:16px">A data story on the Grailed resale market, built from thousands of menswear listings (Rick Owens, Saint Laurent, Kapital, Levi's and others). I built multi-view and interactive Tableau dashboards to answer how resale value is driven by brand prestige, item condition, Japanese-made origin, and price-drop behavior, and found a heavily right-skewed market where prestige and newness dominate.</p>
-            <p>Before any chart, the raw scrape needed serious shaping. Alongside Tableau Prep I used <strong style="color:var(--bone)">Python (pandas)</strong> to normalize collaboration brand strings, extract numeric waist sizes from category text, and engineer the Japan/non-Japan, price-drop, and premium-price flags, then validated the cleaned extract with <strong style="color:var(--bone)">SQL</strong> aggregation queries (median price by brand × condition).</p>
-
-            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
-            <div class="taglist" style="margin-top:10px">
-              <span class="tag tag--phosphor">Python</span><span class="tag tag--phosphor">SQL</span><span class="tag">pandas</span><span class="tag">Tableau</span><span class="tag">Tableau Prep</span><span class="tag">Feature Engineering</span>
-            </div>
-
-            <p class="sm-label" style="margin-top:24px">What I learned</p>
-            <ul class="md" style="margin-top:10px">
-              <li>Most of the signal lived in the prep work. The derived fields (origin, premium, price-drop) carried the whole story.</li>
-              <li>Right-skewed markets punish the mean, so the brand × condition medians told a far truer story of resale value.</li>
-              <li>An interactive filter is only as honest as the aggregation under it, which is why I cross-checked Tableau against my own SQL.</li>
-            </ul>
+          <div class="arch-row__links">
+            <a href="https://public.tableau.com/shared/F6N6XKSZT?:display_count=n&amp;:origin=viz_share_link" target="_blank" rel="noopener">Dashboard →</a>
           </div>
         </div>
-      </article>
 
-      <!-- ============ 06 · TENSORFLOW IA ============ -->
-      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">06</span>
-        <div class="grid grid--2" style="align-items:start">
-          <div>
-            <span class="tag tag--phosphor"><span class="dot"></span>Architecture · Analysis</span>
-            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">TensorFlow Architecture Analysis</h2>
-            <p class="sm-label" style="color:var(--phosphor)">DEVELOPMENT-VIEW STUDY</p>
-            <p style="margin-top:16px">A development-view analysis of the TensorFlow codebase that maps how one of the largest open-source ML frameworks is actually organized, from the <code>tf.*</code> Python frontend that users touch, down through the C API, the C++ core runtime and kernels, the MLIR/XLA compiler stack, and TensorFlow Lite. The deliverable explains the layered dependency structure in plain language.</p>
-            <p>To keep the architecture map honest rather than hand-wavy, I used <strong style="color:var(--bone)">Python</strong> to walk the repository tree, measuring module sizes, mapping import dependencies between packages, and surfacing the real submodule boundaries (<code>eager/</code>, <code>autograph/</code>, <code>grappler/</code>, <code>kernels/</code>) that the write-up is built on.</p>
-
-            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
-            <div class="taglist" style="margin-top:10px">
-              <span class="tag tag--phosphor">Python</span><span class="tag">Repo Analysis</span><span class="tag">Software Architecture</span><span class="tag">Technical Writing</span>
-            </div>
-
-            <p class="sm-label" style="margin-top:24px">What I learned</p>
-            <ul class="md" style="margin-top:10px">
-              <li>Layering is the whole trick. Each layer only depends downward, which is exactly what lets the core change without breaking the bindings.</li>
-              <li>The C API exists as a seam, one translation point so every language binding doesn't have to dig into C++ internals.</li>
-              <li>Reading a giant codebase is a data problem. Scripting the structure beats scrolling through it.</li>
-            </ul>
+        <div class="arch-row">
+          <div class="arch-row__main">
+            <h3 class="arch-row__title">TensorFlow Architecture Analysis</h3>
+            <p class="arch-row__desc">A development-view analysis of the TensorFlow codebase that maps how one of the largest open-source ML frameworks is organized, from the tf.* Python frontend down through the C API, the C++ core, the MLIR/XLA compiler stack, and TF Lite. Python scripts the dependency map so the write-up stays honest.</p>
+            <div class="arch-row__tags"><span class="tag">Python</span><span class="tag">Repo Analysis</span><span class="tag">Software Architecture</span></div>
           </div>
-          <div>
-            <div class="exhibit">
-              <div class="exhibit__bar"><span class="dots"><i></i><i></i><i></i></span><span class="cap">FIG · TENSORFLOW LAYER STACK</span></div>
-              <div class="exhibit__plate exhibit__plate--dark" style="padding:20px">
-                <div class="stack">
-                  <div class="stack__layer top"><span class="lt">tensorflow/python/</span><span class="ld">tf.* frontend · keras · autograph</span></div>
-                  <div class="stack__arrow">↓</div>
-                  <div class="stack__layer"><span class="lt">tensorflow/c · cc/</span><span class="ld">C API seam · language bindings</span></div>
-                  <div class="stack__arrow">↓</div>
-                  <div class="stack__layer"><span class="lt">tensorflow/core/</span><span class="ld">C++ runtime · kernels · graph</span></div>
-                  <div class="stack__arrow">↓</div>
-                  <div class="stack__layer"><span class="lt">compiler/ · xla/</span><span class="ld">MLIR · XLA · JIT</span></div>
-                  <div class="stack__arrow">↓</div>
-                  <div class="stack__layer"><span class="lt">hardware</span><span class="ld">CPU · GPU · TPU · TF Lite</span></div>
-                </div>
-              </div>
-            </div>
-            <a class="btn btn--primary" style="margin-top:16px" href="https://github.com/smalik-25/TensorFlow-Architecture-Analysis" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
+          <div class="arch-row__links">
+            <a href="https://github.com/smalik-25/TensorFlow-Architecture-Analysis" target="_blank" rel="noopener">GitHub →</a>
           </div>
         </div>
-      </article>
 
-      <!-- ============ 07 · HRIS ============ -->
-      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">07</span>
-        <div class="grid grid--2" style="align-items:start">
-          <div>
-            <span class="tag tag--phosphor"><span class="dot"></span>Systems Design · DB</span>
-            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Equality-Driven HRIS</h2>
-            <p class="sm-label" style="color:var(--phosphor)">PAY-EQUITY HRIS</p>
-            <p style="margin-top:16px">A redesign of a global retailer's Human Resources Information System (4,000+ stores) built around a single goal: detect and close gender- and race-based pay disparities. I designed the equitable-pay data model and the manager-facing performance and compensation dashboards, with role-based access control, audit logging, and compensation-review workflows baked in.</p>
-            <p>On top of the systems-design work I built the analytical layer: a <strong style="color:var(--bone)">SQL</strong> schema for employees, compensation history, and audit trails, and a <strong style="color:var(--bone)">Python</strong> pay-gap analysis (regression controlling for role, level, and tenure) that feeds the disparity flags surfaced on the dashboard.</p>
-
-            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
-            <div class="taglist" style="margin-top:10px">
-              <span class="tag tag--phosphor">Python</span><span class="tag tag--phosphor">SQL</span><span class="tag">pandas</span><span class="tag">statsmodels</span><span class="tag">RBAC</span><span class="tag">Audit Logging</span><span class="tag">Dashboard Design</span>
-            </div>
-
-            <p class="sm-label" style="margin-top:24px">What I learned</p>
-            <ul class="md" style="margin-top:10px">
-              <li>Fairness has to be something you can query. A pay-equity claim is only as good as the schema and the controls sitting behind the number.</li>
-              <li>Audit trails and role-based access aren't features you bolt on at the end. They shape the data model from the very first table.</li>
-              <li>A dashboard only changes behavior when the metric behind it can stand up to legal and HR at the same time.</li>
-            </ul>
-          </div>
-          <div>
-            <div class="exhibit">
-              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · COMPENSATION DASHBOARD WIREFRAME</span></div>
-              <div class="exhibit__plate"><img src="assets/img/hris-wireframe.png" alt="HRIS current-progress dashboard wireframe showing completed, on-going, and new goals" /></div>
-            </div>
+        <div class="arch-row">
+          <div class="arch-row__main">
+            <h3 class="arch-row__title">Equality-Driven HRIS</h3>
+            <p class="arch-row__desc">A redesign of a global retailer's HRIS (4,000+ stores) built around one goal: detect and close gender- and race-based pay disparities. A SQL schema for employees, compensation history, and audit trails feeds a Python pay-gap regression that controls for role, level, and tenure.</p>
+            <div class="arch-row__tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">statsmodels</span><span class="tag">RBAC</span></div>
           </div>
         </div>
-      </article>
 
-      <div class="rule rule--accent"><span class="rule__label"><span class="idx">§</span> &nbsp; DATABASES &amp; SQL</span></div>
-
-      <!-- ============ 08 · IMDB DB ============ -->
-      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">08</span>
-        <div class="grid grid--2" style="align-items:start">
-          <div>
-            <span class="tag tag--phosphor"><span class="dot"></span>Database · Optimization</span>
-            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">IMDb Database &amp; Query Optimization</h2>
-            <p class="sm-label" style="color:var(--phosphor)">AZURE SQL · QUERY OPTIMIZATION</p>
-            <p style="margin-top:16px">A relational database built over the full public IMDb dataset on Azure SQL. I loaded the raw <code>.tsv</code> exports into a normalized schema (Title, Basics, Principals, Name) and shaped a query workload of real questions, like most-prolific actors, titles by keyword, and films per genre and year.</p>
-            <p>The heart of the project was performance: I benchmarked the workload, found the full-table scans, and tuned runtime with targeted <strong style="color:var(--bone)">SQL</strong> indexes, using covering indexes and composite keys chosen to match each query's join and filter pattern, then re-ran the workload to measure the improvement.</p>
-
-            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
-            <div class="taglist" style="margin-top:10px">
-              <span class="tag tag--phosphor">SQL</span><span class="tag">Azure SQL</span><span class="tag">Schema Design</span><span class="tag">Indexing</span><span class="tag">ETL</span><span class="tag">Query Tuning</span>
-            </div>
-
-            <p class="sm-label" style="margin-top:24px">What I learned</p>
-            <ul class="md" style="margin-top:10px">
-              <li>An index is a bet on a query pattern. Composite keys like <code>(startYear, tconst)</code> only pay off when they match the workload.</li>
-              <li>You can't optimize what you haven't measured, so the benchmark came before every index.</li>
-              <li>Loading messy public data correctly is half the engineering. The schema is where data quality actually gets enforced.</li>
-            </ul>
-          </div>
-          <div>
-            <div class="exhibit">
-              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">SQL · WORKLOAD INDEX TUNING</span></div>
-              <div class="exhibit__plate exhibit__plate--dark codeplate"><pre><span class="cm">-- targeted indexes for the query workload</span>
-<span class="kw">CREATE INDEX</span> onNConst <span class="kw">ON</span> Principals (nconst);
-<span class="kw">CREATE INDEX</span> onTitle  <span class="kw">ON</span> Title (title);
-<span class="kw">CREATE INDEX</span> onGenre  <span class="kw">ON</span> Basics (genres);
-<span class="cm">-- composite, covers filter + key lookup</span>
-<span class="kw">CREATE INDEX</span> onYear   <span class="kw">ON</span> Basics (startYear, tconst);</pre></div>
-            </div>
+        <div class="arch-row">
+          <div class="arch-row__main">
+            <h3 class="arch-row__title">IMDb Database &amp; Query Optimization</h3>
+            <p class="arch-row__desc">A relational database built over the full public IMDb dataset on Azure SQL. I loaded the raw .tsv exports into a normalized schema, benchmarked a real query workload, found the full-table scans, and tuned runtime with covering and composite indexes matched to each query's pattern.</p>
+            <div class="arch-row__tags"><span class="tag">SQL</span><span class="tag">Azure SQL</span><span class="tag">Indexing</span><span class="tag">Query Tuning</span></div>
           </div>
         </div>
-      </article>
 
-      <!-- ============ 09 · KING COUNTY METRO ============ -->
-      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">09</span>
-        <div class="grid grid--2" style="align-items:start">
-          <div>
-            <div class="exhibit">
-              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · ENTITY-RELATIONSHIP DIAGRAM</span></div>
-              <div class="exhibit__plate"><img src="assets/img/erd-kcmetro.png" alt="Entity-relationship diagram for the King County Metro database: Rider, Route, Fare, Bus Operation, Buses, Bus Driver, Calendar" /></div>
-            </div>
-          </div>
-          <div>
-            <span class="tag tag--phosphor"><span class="dot"></span>Database Design</span>
-            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">King County Metro Database</h2>
-            <p class="sm-label" style="color:var(--phosphor)">RELATIONAL DESIGN</p>
-            <p style="margin-top:16px">A relational database designed for King County Metro to address two real problems: accessibility (coverage in underserved areas) and efficiency (route performance and delays). I modeled the full domain (riders, routes, fares, bus operations, vehicles, drivers, and service calendars) into a normalized schema with a complete entity-relationship diagram and relational mapping.</p>
-            <p>The schema is the <strong style="color:var(--bone)">SQL</strong> foundation; on top of it I framed a <strong style="color:var(--bone)">Python (pandas)</strong> analysis layer for the information needs the system exists to serve: ridership demand by route, peak-time performance, and delay patterns. Those are the queries that turn the database into decisions.</p>
-
-            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
-            <div class="taglist" style="margin-top:10px">
-              <span class="tag tag--phosphor">SQL</span><span class="tag tag--phosphor">Python</span><span class="tag">ER Modeling</span><span class="tag">Normalization</span><span class="tag">pandas</span>
-            </div>
-
-            <p class="sm-label" style="margin-top:24px">What I learned</p>
-            <ul class="md" style="margin-top:10px">
-              <li>Good ER modeling is really requirements analysis. Every entity traces back to a stated information need.</li>
-              <li>Normalization is a conversation about which facts are allowed to change independently.</li>
-              <li>A transit schema is also an accessibility statement. What you choose to model is what you can measure and fix later.</li>
-            </ul>
+        <div class="arch-row">
+          <div class="arch-row__main">
+            <h3 class="arch-row__title">King County Metro Database</h3>
+            <p class="arch-row__desc">A relational database designed for King County Metro to address accessibility and route efficiency. I modeled the full domain (riders, routes, fares, operations, vehicles, drivers, calendars) into a normalized schema with a complete ERD, then framed a pandas analysis layer for ridership and delay patterns.</p>
+            <div class="arch-row__tags"><span class="tag">SQL</span><span class="tag">ER Modeling</span><span class="tag">Normalization</span><span class="tag">pandas</span></div>
           </div>
         </div>
-      </article>
 
-      <div class="rule rule--accent"><span class="rule__label"><span class="idx">§</span> &nbsp; MACHINE LEARNING</span></div>
-
-      <!-- ============ 10 · PRIVACY REVIEW DETECTOR (no visual) ============ -->
-      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">10</span>
-        <div style="max-width:78ch">
-          <span class="tag tag--oxblood"><span class="dot"></span>NLP · Machine Learning</span>
-          <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Privacy-Aware Fashion Review Risk Detector</h2>
-          <p class="sm-label" style="color:var(--phosphor)">NLP CLASSIFIER</p>
-          <p style="margin-top:16px">A system that flags fashion reviews likely to overshare sensitive personal information (body measurements, health, pregnancy) <em>before</em> they're posted publicly, prompting the writer to reconsider. Built on the Women's Clothing E-Commerce Reviews dataset (23,486 reviews), with a synthetic <code>privacy_risk</code> target engineered during preprocessing.</p>
-          <p>The core is a <strong style="color:var(--bone)">Python</strong> NLP pipeline: TF-IDF features over the review text plus light metadata, a logistic-regression classifier, and tuning aimed deliberately at recall on the risk class, so it catches genuine disclosures without burying users in false warnings.</p>
-
-          <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
-          <div class="taglist" style="margin-top:10px">
-            <span class="tag tag--phosphor">Python</span><span class="tag">scikit-learn</span><span class="tag">NLP</span><span class="tag">pandas</span><span class="tag">TF-IDF</span>
-          </div>
-
-          <p class="sm-label" style="margin-top:24px">What I learned</p>
-          <ul class="md" style="margin-top:10px">
-            <li>The hard part of a safety classifier is the cost asymmetry. A missed disclosure and a false alarm are not the same size of mistake.</li>
-            <li>Synthetic labeling is a modeling decision wearing a disguise. How you define <code>privacy_risk</code> ends up defining the whole system.</li>
-            <li>Privacy tooling has to inform rather than censor. The model's job is to give the user a choice, not take one away.</li>
-          </ul>
-        </div>
-      </article>
-
-      <!-- ============ 11 · RETURN RISK (no visual) ============ -->
-      <article class="card card--accent" style="padding:40px; margin-bottom:40px">
-        <span class="card__index">11</span>
-        <div style="max-width:78ch">
-          <span class="tag tag--oxblood"><span class="dot"></span>Machine Learning</span>
-          <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">Fashion Subscription Return Risk Predictor</h2>
-          <p class="sm-label" style="color:var(--phosphor)">FIT PREDICTION</p>
-          <p style="margin-top:16px">A decision-support model for a subscription clothing service that estimates, before a box ships, whether each item will be kept or returned. Built on the Rent-the-Runway fit dataset (~82,790 transactions, 47,958 customers, 1,378 items), with the <code>kept_item</code> target derived from fit feedback. The goal: cut return rates and shipping cost without collapsing into safe, boring recommendations.</p>
-          <p>I modeled it in <strong style="color:var(--bone)">Python</strong> using customer measurements, sizes, and product attributes as features, and used <strong style="color:var(--bone)">SQL</strong> joins across the customer, product, and transaction tables to assemble the training set and engineer per-customer fit history.</p>
-
-          <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
-          <div class="taglist" style="margin-top:10px">
-            <span class="tag tag--phosphor">Python</span><span class="tag tag--phosphor">SQL</span><span class="tag">scikit-learn</span><span class="tag">pandas</span><span class="tag">Feature Engineering</span>
-          </div>
-
-          <p class="sm-label" style="margin-top:24px">What I learned</p>
-          <ul class="md" style="margin-top:10px">
-            <li>"Fit" is a relationship, not a property. The features that mattered compared a body to a garment, not either one on its own.</li>
-            <li>Optimizing purely for low returns quietly kills variety, so the real objective is multi-sided.</li>
-            <li>The joins are where the modeling actually happened. Most of the signal came from assembling each customer's history.</li>
-          </ul>
-        </div>
-      </article>
-
-      <div class="rule rule--accent"><span class="rule__label"><span class="idx">§</span> &nbsp; ANALYSIS &amp; MORE</span></div>
-
-      <!-- ============ 12 · COVID-19 ============ -->
-      <article class="card card--accent" style="padding:40px; margin-bottom:8px">
-        <span class="card__index">12</span>
-        <div class="grid grid--2" style="align-items:start">
-          <div>
-            <div class="exhibit">
-              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · NEW CASES BY STATE · MAR–MAY 2020</span></div>
-              <div class="exhibit__plate"><img src="assets/img/covid-cases.png" alt="Line chart of new COVID-19 cases per month by US state, March to May 2020, with policy-response markers" /></div>
-            </div>
-          </div>
-          <div>
-            <span class="tag tag--phosphor"><span class="dot"></span>Analysis · Viz</span>
-            <h2 class="display" style="font-size:var(--t-h1); margin:16px 0 4px">COVID-19 Regional Analysis</h2>
-            <p class="sm-label" style="color:var(--phosphor)">TRENDS · IMPACT · RESPONSE</p>
-            <p style="margin-top:16px">An analysis of COVID-19 trends, impact, and government responses across US states, tracking new cases over time against the timing of state-level policy responses and showing how differently regions moved through the early pandemic. New York's early spike against the slower curves of other states is the throughline.</p>
-            <p>I worked the data in <strong style="color:var(--bone)">Python (pandas)</strong>, reshaping case and response series and aligning policy-response dates to the case timeline, then used <strong style="color:var(--bone)">SQL</strong> to aggregate cases by state and month before plotting. The chart annotates each state's response date directly onto the case trajectory.</p>
-
-            <p class="sm-label" style="margin-top:24px">Tools &amp; skills</p>
-            <div class="taglist" style="margin-top:10px">
-              <span class="tag tag--phosphor">Python</span><span class="tag tag--phosphor">SQL</span><span class="tag">pandas</span><span class="tag">Matplotlib</span><span class="tag">Time-Series</span>
-            </div>
-
-            <p class="sm-label" style="margin-top:24px">What I learned</p>
-            <ul class="md" style="margin-top:10px">
-              <li>Lining events up against a time series is where the insight lives. The case curve only means something next to the response date.</li>
-              <li>Per-capita versus raw counts changes the story completely, so the framing is an analytical choice, not a neutral one.</li>
-              <li>One well-annotated chart can carry an argument better than a page of tables.</li>
-            </ul>
+        <div class="arch-row">
+          <div class="arch-row__main">
+            <h3 class="arch-row__title">Privacy-Aware Fashion Review Risk Detector</h3>
+            <p class="arch-row__desc">A classifier that flags fashion reviews likely to overshare sensitive personal information (body measurements, health, pregnancy) before they're posted, prompting the writer to reconsider. TF-IDF plus a logistic-regression model tuned deliberately for recall on the risk class.</p>
+            <div class="arch-row__tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">NLP</span><span class="tag tag--oxblood">Privacy</span></div>
           </div>
         </div>
-      </article>
+
+        <div class="arch-row">
+          <div class="arch-row__main">
+            <h3 class="arch-row__title">Fashion Subscription Return Risk Predictor</h3>
+            <p class="arch-row__desc">A decision-support model for a subscription clothing service that estimates, before a box ships, whether each item will be kept or returned. Built on the Rent-the-Runway fit dataset, with SQL joins assembling per-customer fit history as the features that actually carried the signal.</p>
+            <div class="arch-row__tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">scikit-learn</span><span class="tag">Feature Engineering</span></div>
+          </div>
+        </div>
+
+        <div class="arch-row">
+          <div class="arch-row__main">
+            <h3 class="arch-row__title">COVID-19 Regional Analysis</h3>
+            <p class="arch-row__desc">An analysis of COVID-19 trends, impact, and government responses across US states, tracking new cases over time against the timing of state-level policy responses. pandas reshaped the series and SQL aggregated by state and month before plotting the annotated case trajectories.</p>
+            <div class="arch-row__tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Matplotlib</span><span class="tag">Time-Series</span></div>
+          </div>
+        </div>
+
+      </div>
 
     </section>
   </main>
@@ -636,7 +603,7 @@
     <div class="footer__inner">
       <p class="eyebrow"><span class="idx">§ 0.7</span> &nbsp; LET'S CONNECT</p>
       <h2 class="display" style="margin:12px 0 8px">Get in touch.</h2>
-      <p class="lead" style="margin-bottom:32px">I'm open to data analyst and data engineering roles, and good conversations about data, music, or what infrastructure is really for. Say hi.</p>
+      <p class="lead" style="margin-bottom:32px">I'm open to data and analytics engineering, ML, and agentic-AI roles, and good conversations about data, music, or what infrastructure is really for. Say hi.</p>
       <div class="connect-grid">
         <a class="connect-card" href="mailto:maliksam2500@gmail.com"><span class="cc-label">→ Email</span><span class="cc-value">maliksam2500@gmail.com</span></a>
         <a class="connect-card" href="https://www.linkedin.com/in/sam-malik" target="_blank" rel="noopener"><span class="cc-label">→ LinkedIn</span><span class="cc-value">/in/sam-malik</span></a>
