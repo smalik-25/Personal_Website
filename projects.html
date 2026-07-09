@@ -89,6 +89,11 @@
           </div>
           <div>
             <div class="exhibit" style="margin-bottom:16px">
+              <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">LIVE · VIEWER + AGENT · ONE TOOL-DRIVEN REQUEST</span></div>
+              <!-- TODO(Sam): modelsense-viewer.png has two em dashes baked into the agent's reply (around the two "Wheels" node names), which breaks the no-em-dash rule. Regenerate the shot from a ModelSense turn whose reply uses commas or parentheses (or strip em dashes in the app's response rendering), then re-shoot the same wheel-highlight turn. -->
+              <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/modelsense-viewer.png" alt="ModelSense running live: a Cesium Milk Truck glTF model loaded in the React Three Fiber viewer on the left, and the agent chat on the right answering 'find every node with wheel in the name and highlight the largest one' by reporting two wheel nodes tied at 768 triangles each and highlighting the front pair, with a per-turn readout of 4 turns, 12.0s, $0.0665, and 3394/523 tokens" /></div>
+            </div>
+            <div class="exhibit" style="margin-bottom:16px">
               <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">FIG · AGENT + MCP ARCHITECTURE</span></div>
               <div class="exhibit__plate exhibit__plate--dark" style="padding:20px">
                 <div class="stack">
@@ -163,7 +168,6 @@
               <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">LANGFUSE · ONE TURN · 3 TOOL SPANS + COST</span></div>
               <div class="exhibit__plate exhibit__plate--dark" style="padding:0"><img src="assets/img/modelsense-langfuse.png" alt="Langfuse trace of one ModelSense turn: the agent answers 'find every node with wheel in the name and highlight the largest one' with three tool spans (load_model, find_elements, highlight_elements) over 4 turns in 28.2s, 3,394 input and 493 output tokens, $0.15, traced through the langfuse-sdk over OpenTelemetry" /></div>
             </div>
-            <!-- TODO(Sam): add a static ModelSense viewer screenshot (a loaded model with an element highlighted + a measurement drawn). Save as assets/img/modelsense-viewer.png and I'll wire it as the hero exhibit here. -->
             <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap">
               <a class="btn btn--primary" href="https://model-sense-web.vercel.app/" target="_blank" rel="noopener">Open live demo <span>→</span></a>
               <a class="btn btn--ghost" href="https://github.com/smalik-25/ModelSense" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
@@ -348,9 +352,7 @@
       </article>
 
       <!-- ============ 04 · VOICE ASSISTANT SENTIMENT (revamped) ============ -->
-      <!-- PHASE 3 EMBED (decided): plain iframe of https://smalik25-voice-assistant-review-sentiment-classifier.hf.space
-           The Space serves an HTML demo UI at GET / whose form posts same-origin to /predict, so no CORS work is needed.
-           Add the lazy-loaded iframe + cold-start skeleton in Phase 3. Button below already points at the right URL. -->
+      <!-- Live demo: plain iframe of the HF Space (serves its own HTML UI at GET /, posts same-origin to /predict, no CORS). Lazy-loaded below the grid. -->
       <article id="p04" class="card card--accent" style="padding:40px; margin-bottom:40px">
         <span class="card__index">04</span>
         <div class="grid grid--2" style="align-items:start">
@@ -438,10 +440,21 @@
                 </div>
               </div>
             </div>
-            <!-- TODO(Phase 3): replace/augment the button below with a lazy-loaded iframe of the hf.space demo + cold-start skeleton ("spinning up, first load 30-60s") + this new-tab fallback link. -->
             <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap">
               <a class="btn btn--primary" href="https://smalik25-voice-assistant-review-sentiment-classifier.hf.space" target="_blank" rel="noopener">Try the live demo <span>→</span></a>
               <a class="btn btn--ghost" href="https://github.com/smalik-25/Voice-Assistant-Review-Sentiment-Classifier" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
+            </div>
+          </div>
+        </div>
+        <!-- PHASE 3: lazy-loaded live demo, iframe injected on scroll by main.js -->
+        <div class="exhibit demo" data-embed data-src="https://smalik25-voice-assistant-review-sentiment-classifier.hf.space" data-title="Alexa review sentiment classifier, live demo" style="margin-top:24px">
+          <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">LIVE DEMO · CLASSIFY AN ALEXA REVIEW</span></div>
+          <div class="demo__stage">
+            <div class="demo__skeleton">
+              <div class="demo__spinner" aria-hidden="true"></div>
+              <p class="demo__status">Waking the live demo. The free-tier Space sleeps after inactivity, so the first load can take 30 to 60 seconds. Paste a review, run it, and it classifies right here.</p>
+              <p class="demo__nojs">This live demo loads with JavaScript. Open it in a new tab below.</p>
+              <a class="btn btn--ghost" href="https://smalik25-voice-assistant-review-sentiment-classifier.hf.space" target="_blank" rel="noopener">Open in a new tab <span>→</span></a>
             </div>
           </div>
         </div>
@@ -498,10 +511,21 @@
                 </div>
               </div>
             </div>
-            <!-- TODO(Phase 3): embed <iframe src="https://sneaker-intel-2.streamlit.app/?embed=true"> below the case study, lazy-loaded, with cold-start copy + new-tab fallback (Streamlit sleeps after 12h). -->
             <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap">
               <a class="btn btn--primary" href="https://sneaker-intel-2.streamlit.app/" target="_blank" rel="noopener">Open live dashboard <span>→</span></a>
               <a class="btn btn--ghost" href="https://github.com/smalik-25/sneaker-intel" target="_blank" rel="noopener">View on GitHub <span>→</span></a>
+            </div>
+          </div>
+        </div>
+        <!-- PHASE 3: lazy-loaded live dashboard, iframe injected on scroll by main.js -->
+        <div class="exhibit demo" data-embed data-src="https://sneaker-intel-2.streamlit.app/?embed=true" data-title="Sneaker Resale Intelligence dashboard, live" style="margin-top:24px">
+          <div class="exhibit__bar"><span class="dots"><i class="live"></i><i></i><i></i></span><span class="cap">LIVE · SNEAKER RESALE DASHBOARD</span></div>
+          <div class="demo__stage">
+            <div class="demo__skeleton">
+              <div class="demo__spinner" aria-hidden="true"></div>
+              <p class="demo__status">Waking the live dashboard. Streamlit Community Cloud sleeps the app after about 12 hours; if a wake button appears inside, click it or open the dashboard in a new tab. Every figure reads straight from the dbt marts.</p>
+              <p class="demo__nojs">This live dashboard loads with JavaScript. Open it in a new tab below.</p>
+              <a class="btn btn--ghost" href="https://sneaker-intel-2.streamlit.app/" target="_blank" rel="noopener">Open in a new tab <span>→</span></a>
             </div>
           </div>
         </div>

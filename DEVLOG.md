@@ -2,6 +2,32 @@
 
 Running log of what changed on the site and why. Newest first.
 
+## 2026-07-08 · Projects page: live demos embedded, ModelSense viewer wired (Phase 3)
+
+Put the two live demos on the page and made project 00 lead with the ModelSense viewer shot.
+
+- **ModelSense viewer, lead exhibit.** The screenshot I took (Cesium Milk Truck, the agent finding both wheel nodes and highlighting the front pair) now opens the ModelSense exhibit column, above the architecture figure. It shows the same "wheel" request the Langfuse trace below it breaks down, so the product shot and the trace read as one story. One thing I have to fix at the source: the agent's reply baked into that screenshot uses em dashes, which the page rules forbid. Retouching the image would be dishonest, so I left a visible TODO to regenerate the shot from a reply that uses commas or parentheses (or to strip em dashes in the app's response rendering first).
+- **Alexa classifier, embedded.** The HF Space serves its own HTML form at `GET /` (textarea, predict, result), so the embed is a plain iframe of the Space. No CORS work and no change to the classifier repo. It sits full width below the case study.
+- **Sneaker Resale dashboard, embedded.** Plain iframe of the Streamlit app with `?embed=true`, full width below its case study.
+- **Lazy, not eager.** Neither iframe is in the initial HTML. An IntersectionObserver in main.js injects the iframe only when the band scrolls within 400px of the viewport, so the two heavy embeds cost nothing on load and never touch interactive time before you reach them. main.js is shared across every page and does nothing where there are no demo bands.
+- **Cold-start handling.** Each band shows a spinner and honest copy while it wakes: the HF free tier can take 30 to 60 seconds from sleep, and Streamlit Community Cloud sleeps after about 12 hours and may show its own wake button, which you can click inside the frame or open in a new tab. Every band carries an "open in a new tab" link that works before, during, and after load.
+
+Reviewed the whole change adversarially before calling it done and fixed four things it surfaced:
+
+- The 12-second "safety" timer used to reveal the iframe even when it had not loaded, so a slow cold start could flash a blank white box over the dark page and hide the escape link. The iframe now reveals only on a real load event; the timer, pushed past the 60-second ceiling, degrades the skeleton in place instead and keeps the new-tab link.
+- The hidden skeleton was only faded out, so its link stayed in the keyboard tab order and the screen-reader tree after the demo loaded. It now goes `visibility:hidden` once the iframe is ready.
+- With JavaScript off, the spinner spun forever under copy that promised a load that would never come. The spinner and "waking" line are now gated behind a JS class, and a static "loads with JavaScript, open in a new tab" line shows in their place.
+- Renamed the viewer caption from "one tool-driven turn" to "one tool-driven request" so it stops colliding with the "4 turns" number printed inside the same screenshot.
+
+Verified locally: HTML tag balance holds, main.js passes `node --check`, and all four target URLs return 200 with no redirect. The ModelSense production URL (`model-sense-web.vercel.app`) now loads publicly and serves the real app rather than a Vercel login, so the deployment-protection blocker looks cleared. Cold-start timing and mobile layout still need a real post-deploy check, since neither can be trusted from a local file open.
+
+Next:
+- Confirm both embeds cold and warm on the deployed site, and the ModelSense URL in an incognito window.
+- Regenerate modelsense-viewer.png without em dashes (see the TODO in projects.html).
+- Still open from Phase 2: the fitness dbt DAG screenshot.
+- Optional stretch: an HF keep-alive and a Streamlit wake job, both in their own repos, not this one.
+- Separate from this work: the section eyebrows, date ranges, and two older image alt lines still use em dashes. They pre-date this change and belong to the existing eyebrow style, so I left them, but they are worth a call since the copy rule is no em dashes anywhere.
+
 ## 2026-07-08 · Projects page: 13-scroll to 6 featured + archive (Phase 1, part of Phase 2)
 
 Reworked `projects.html` from a flat 13-project scroll into six featured case studies with an archive underneath. The old page treated every project as equal, which buried the work I'd actually defend in an interview under coursework I did in a weekend. The new page is built to read two ways at once: a stat band and a one-paragraph hook for a 30-second skim, a full case study with an architecture figure and honest results for anyone who wants the 10-minute version.
